@@ -6,6 +6,8 @@ $(document).ready(function () {
   var $header = $('<header></header>');
   var $nav = $('<nav><ul class="nav-list" id="nav-list"><li class="nav-list-item" id="nav-list-about">About</li></ul></nav>');
 
+  var $main = $('<main></main>');
+
   // Create event handler functions
 
   // Set event listeners (providing appropriate handlers as input)
@@ -13,4 +15,6 @@ $(document).ready(function () {
   // Append new HTML elements to the DOM
   $header.appendTo($body);
   $nav.appendTo($header);
+
+  $main.appendTo($body);
 });
