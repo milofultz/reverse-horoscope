@@ -16,7 +16,7 @@ $(document).ready(function () {
   var $quizStartButton = $('<div class="button-container" id="quiz-start-button-container"><button class="button" id="quiz-start-button" value="Start">Start</button></div>');
   // Main:Quiz
   var $quiz = $('<section class="container" id="quiz"></section>');
-  var $quizForm = $('<form action="" id="quiz-form"></form>');
+  var $quizForm = $('<form action="" id="quiz-form"></form>'); // all q's dynamically generated
   var $quizSubmit = $('<div class="button-container" id="quiz-submit-button-container"><button class="button" id="quiz-submit-button" value="Submit">Submit</button></div>');
   // Main:Results
   var $results = $('<section class="container" id="results"></section>');
@@ -28,8 +28,21 @@ $(document).ready(function () {
   // Create event handler functions
 
   // Set event listeners (providing appropriate handlers as input)
+  $quizStartButton.on('click', function (event) {
+    $titleScreen.toggle();
+    $quiz.toggle();
+  });
+
+  $quizSubmit.on('click', function (event) {
+    $quiz.toggle();
+    $results.toggle();
+  });
 
   // Append new HTML elements to the DOM
+
+  // Hide later elements
+  $quiz.toggle();
+  $results.toggle();
 
   // Header
   $header.appendTo($body);
