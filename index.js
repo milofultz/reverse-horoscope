@@ -12,23 +12,16 @@ $(document).ready(function () {
   var $mainDescription = $('<h2 class="description" id="main-description">Discover when you were supposed to be born</h2>');
   var $quizStartButton = $('<div class="button-container" id="quiz-start-button-container"><button class="button" id="quiz-start-button" value="Start">Start</button></div>');
 
-  var $quizContainer = $('<section class="container" id="quiz-container"></section>');
-  var $quiz = $('<form action=""></form>');
+  var $quiz = $('<section class="container" id="quiz"></section>');
+  var $quizForm = $('<form action="" id="quiz-form"></form>');
   var $quizSubmit = $('<div class="button-container" id="quiz-submit-button-container"><button class="button" id="quiz-submit-button" value="Submit">Submit</button></div>');
 
   // Create event handler functions
-  var showQuiz = function () {
-    $titleScreen.hide();
-    // Quiz
-    $quizContainer.appendTo($main);
-    $quiz.appendTo($quizContainer);
-    $quizSubmit.appendTo($quizContainer);
-  };
 
   // Set event listeners (providing appropriate handlers as input)
-  $quizStartButton.on('click', showQuiz);
 
   // Append new HTML elements to the DOM
+
   // Header
   $header.appendTo($body);
   $nav.appendTo($header);
@@ -40,4 +33,8 @@ $(document).ready(function () {
   $mainTitle.appendTo($titleScreen);
   $mainDescription.appendTo($titleScreen);
   $quizStartButton.appendTo($titleScreen);
+  // Quiz
+  $quiz.appendTo($main);
+  $quizForm.appendTo($quiz);
+  $quizSubmit.appendTo($quiz);
 });
