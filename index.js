@@ -29,11 +29,38 @@ $(document).ready(function () {
 
   // Set event listeners (providing appropriate handlers as input)
   $quizStartButton.on('click', function (event) {
+    // Pull a random horoscope from each sign
+    // Generate all questions and give each question a unique ID for calculating later
+      // var $quizQuestionHeader = $('<h3>Question # of 12</h3>')
+      // var $quizText = $('<div class="quiz-text">Horoscope goes here</div>');
+      // var $quizQuestion = $('<label for="test">How much does this sound like you?</label><input type="range" min="1" max="100" value="50" class="range-slider" id="test" name="test"></input>')
+    // Shuffle their order
+    // Display them all
     $titleScreen.toggle();
     $quiz.toggle();
   });
 
   $quizSubmit.on('click', function (event) {
+    // Calculate results of test
+      // Get all values of questions and put them in an object (real values)
+      // get highest score
+      // measure pull of both adjacent signs and set birthday from that
+        // sum both adjacent numbers
+        // get (before / sum) and (after / sum)
+        // if before is bigger:
+          // multiply (1 - (before / sum)) * days in the sign's period
+        // if after:
+          // multiply ((after / sum)) * days in the sign's period
+        // Set birthday to day ^^ in period
+      // get adjusted sign averages
+        // for each sign
+          // create a new prop (adjusted values)
+          // add that sign's numbers to it
+          // look at adjacent signs and add 10% of each to it
+        // add total adjusted values together
+        // for each sign
+          // add prop for percent of sign's value against total adjusted values
+    // Generate graph elements
     $quiz.toggle();
     $results.toggle();
   });
