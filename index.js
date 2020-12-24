@@ -17,8 +17,16 @@ $(document).ready(function () {
   var $quizSubmit = $('<div class="button-container" id="quiz-submit-button-container"><button class="button" id="quiz-submit-button" value="Submit">Submit</button></div>');
 
   // Create event handler functions
+  var showQuiz = function () {
+    $titleScreen.hide();
+    // Quiz
+    $quizContainer.appendTo($main);
+    $quiz.appendTo($quizContainer);
+    $quizSubmit.appendTo($quizContainer);
+  };
 
   // Set event listeners (providing appropriate handlers as input)
+  $quizStartButton.on('click', showQuiz);
 
   // Append new HTML elements to the DOM
   // Header
