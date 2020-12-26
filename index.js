@@ -20,7 +20,7 @@ $(document).ready(function () {
   var $quizSubmit = $('<div class="button-container" id="quiz-submit-button-container"><button class="button" id="quiz-submit-button" value="Submit">Submit</button></div>');
   // Main:Results
   var $results = $('<section class="container" id="results"></section>');
-  var $resultsTitle = $('<h1 class="title" id="results-title">Your Real Sign Is {this}</h1>');
+  var $resultsTitle = $('<h1 class="title" id="results-title"></h1>');
   var $resultsBirthday = $('<h2 class="description" id="results-birthday">Birthday: Month Day</h2>');
   var $resultsConstellation = $('<img src="" class="constellation" id="results-constellation" />');
   var $resultsGraph = $('<div class="chart-container" id="chart-container"></div>');
@@ -61,37 +61,9 @@ $(document).ready(function () {
   });
 
   $quizSubmit.on('click', function (event) {
-    // Get all values of questions and put them in an object (real values)
-    var $quizInputs = $quizForm.find('input');
-    var quizAnswers = {};
-    for (var i = 0; i < $quizInputs.length; i++) {
-      var number = i + 1;
-      var $question = $('#question-' + number);
-      var questionSign = $question[0].dataset.sign;
-      var questionScore = parseInt($question.val());
-      quizAnswers[questionSign] = questionScore;
-    }
-    // get highest score
-    console.log(quizAnswers);
-    var winner = '';
-    var highestScore = 0;
-    for (var i = 0; i < horoscopeSignsOrdered.length; i++) {
-      if (quizAnswers[horoscopeSignsOrdered[i]] > highestScore) {
-        winner = horoscopeSignsOrdered[i];
-        highestScore = quizAnswers[horoscopeSignsOrdered[i]];
-      }
-    }
-    console.log(winner, highestScore);
-    // measure pull of both adjacent signs and set birthday from that
-      // get adjusted sign averages
-        // for each sign
-          // create a new prop (adjusted values)
-          // add that sign's numbers to it
-          // look at adjacent signs and add 10% of each to it
-        // add total adjusted values together
-        // for each sign
-          // add prop for percent of sign's value against total adjusted values
+    var scores = getScores();
     // Generate graph elements
+    $resultsTitle.text('Your Real Sign Is ' + scores.winner);
     $quiz.toggle();
     $results.toggle();
   });
@@ -105,7 +77,74 @@ $(document).ready(function () {
         array[endIndex] = hold;
     }
     return array;
-}
+  }
+
+  var getScores = function () {
+    // Get answers
+    var $quizInputs = $quizForm.find('input');
+    var quizAnswers = {};
+    for (var i = 0; i < $quizInputs.length; i++) {
+      var number = i + 1;
+      var $question = $('#question-' + number);
+      var questionSign = $question[0].dataset.sign;
+      var questionScore = parseInt($question.val());
+      quizAnswers[questionSign] = questionScore;
+    }
+    // get highest score
+    var winner = '';
+    var highestScore = 0;
+    for (var i = 0; i < horoscopeSignsOrdered.length; i++) {
+      if (quizAnswers[horoscopeSignsOrdered[i]] > highestScore) {
+        winner = horoscopeSignsOrdered[i];
+        highestScore = quizAnswers[horoscopeSignsOrdered[i]];
+      }
+    }
+    // get adjusted averages by adding some of adjacent signs
+    var adjustedScores = {};
+    for (var i = 0; i < horoscopeSignsOrdered.length; i++) {
+      var sign = horoscopeSignsOrdered[i];
+      adjustedScores[sign] = quizAnswers[sign];
+      var previous = horoscopeSignsOrdered[Math.abs((i - 1) % 12)];
+      var next = horoscopeSignsOrdered[(i + 1) % 12];
+      adjustedScores[sign] += 0.1 * quizAnswers[previous];
+      adjustedScores[sign] += 0.1 * quizAnswers[next];
+    }
+    // get scores in percent
+    var totalScores = Object.values(adjustedScores).reduce(function (total, el) {
+      return total + el;
+    });
+    var resultsInPercent = {};
+    var remainingPercentages = {};
+    for (var i = 0; i < horoscopeSignsOrdered.length; i++) {
+      var sign = horoscopeSignsOrdered[i];
+      var percent = (adjustedScores[sign] / totalScores) * 100;
+      resultsInPercent[sign] = Math.floor(percent);
+      remainingPercentages[sign] = percent - resultsInPercent[sign];
+    }
+    var difference = 100 - Object.values(resultsInPercent).reduce(function (total, el) {
+      return total + el;
+    });
+    var localRemainingPercentages = JSON.parse(JSON.stringify(remainingPercentages));
+    while (difference > 0) {
+      var highestSign = '';
+      var highestNum = 0;
+      for (var i = 0; i < horoscopeSignsOrdered.length; i++) {
+        var sign = horoscopeSignsOrdered[i];
+        if (localRemainingPercentages[sign] > highestNum) {
+          highestSign = sign;
+          highestNum = remainingPercentages[sign];
+        }
+      }
+      delete localRemainingPercentages[highestSign];
+      resultsInPercent[highestSign]++;
+      difference--;
+    }
+
+    var scores = {};
+    scores.winner = winner;
+    scores.percentResults = resultsInPercent;
+    return scores;
+  }
 
   // Append new HTML elements to the DOM
 
