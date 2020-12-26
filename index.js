@@ -43,11 +43,13 @@ $(document).ready(function () {
     // Generate all questions and give each question a unique ID for calculating later
     for (var i = 0; i < quizHoroscopes.length; i++) {
       var number = i + 1
+      var horoscopeText = Object.values(quizHoroscopes[i])[0];
+      var horoscopeSign = Object.keys(quizHoroscopes[i])[0];
       var $questionContainer = $('<fieldset class="question-container"></fieldset>');
       var $questionHeader = $('<legend class="question-header" id="question-#-header">Question ' + number + ' of 12</legend>');
       var $questionText = $('<div class="question-text" id="question-' + number + '-text"></div>');
-      $questionText.text(Object.values(quizHoroscopes[i]));
-      var $questionInput = $('<label for="question-' + number + '">How much does this sound like you?</label><input type="range" min="1" max="100" value="50" class="range-slider" id="question-' + number + '" name="question-' + number + '"></input>')
+      $questionText.text(horoscopeText);
+      var $questionInput = $('<label for="question-' + number + '">How much does this sound like you?</label><input type="range" min="1" max="100" value="50" data-sign="' + horoscopeSign + '" class="range-slider" id="question-' + number + '" name="question-' + number + '"></input>')
       $questionContainer.appendTo($quizForm);
       $questionHeader.appendTo($questionContainer);
       $questionText.appendTo($questionContainer);
@@ -60,23 +62,35 @@ $(document).ready(function () {
 
   $quizSubmit.on('click', function (event) {
     // Get all values of questions and put them in an object (real values)
+    var $quizInputs = $quizForm.find('input');
+    var quizAnswers = {};
+    for (var i = 0; i < $quizInputs.length; i++) {
+      var number = i + 1;
+      var $question = $('#question-' + number);
+      var questionSign = $question[0].dataset.sign;
+      var questionScore = parseInt($question.val());
+      quizAnswers[questionSign] = questionScore;
+    }
     // get highest score
+    console.log(quizAnswers);
+    var winner = '';
+    var highestScore = 0;
+    for (var i = 0; i < horoscopeSignsOrdered.length; i++) {
+      if (quizAnswers[horoscopeSignsOrdered[i]] > highestScore) {
+        winner = horoscopeSignsOrdered[i];
+        highestScore = quizAnswers[horoscopeSignsOrdered[i]];
+      }
+    }
+    console.log(winner, highestScore);
     // measure pull of both adjacent signs and set birthday from that
-      // sum both adjacent numbers
-      // get (before / sum) and (after / sum)
-      // if before is bigger:
-        // multiply (1 - (before / sum)) * days in the sign's period
-      // if after:
-        // multiply ((after / sum)) * days in the sign's period
-      // Set birthday to day ^^ in period
-    // get adjusted sign averages
-      // for each sign
-        // create a new prop (adjusted values)
-        // add that sign's numbers to it
-        // look at adjacent signs and add 10% of each to it
-      // add total adjusted values together
-      // for each sign
-        // add prop for percent of sign's value against total adjusted values
+      // get adjusted sign averages
+        // for each sign
+          // create a new prop (adjusted values)
+          // add that sign's numbers to it
+          // look at adjacent signs and add 10% of each to it
+        // add total adjusted values together
+        // for each sign
+          // add prop for percent of sign's value against total adjusted values
     // Generate graph elements
     $quiz.toggle();
     $results.toggle();

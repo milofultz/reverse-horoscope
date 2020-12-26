@@ -1,3 +1,18 @@
+var horoscopeSignsOrdered = [
+    "aries",
+    "taurus",
+    "gemini",
+    "cancer",
+    "leo",
+    "virgo",
+    "libra",
+    "scorpio",
+    "sagittarius",
+    "capricorn",
+    "aquarius",
+    "pisces"
+];
+
 var horoscopesText = {
     "aquarius": [
         "There's not only an AM/PM split, but a mood division too. Creatively you'll be on top form and able to impress people with your vision. Emotionally, however, you could tend towards being brusque and dismissive. If you want others to listen and agree, then you'll need to draw on every ounce of tact!",
