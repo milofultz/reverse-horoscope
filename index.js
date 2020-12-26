@@ -62,6 +62,19 @@ $(document).ready(function () {
 
   $quizSubmit.on('click', function (event) {
     var scores = getScores();
+    // get "real" birthday
+      // make object of start and end days in Dates for each sign
+      // get day in between start and end for winning month
+      // find which "side" of winning sign is higher
+      // if previous month is higher
+        // divide total days availble for sign
+        // divide this by half
+        // multiply this by previous sign percentage and make negative
+      // if next
+        // divide total days availble for sign
+        // divide this by half
+        // multiply this by previous sign percentage
+      // set birthday to start + adjustment
     // Generate graph elements
     $resultsTitle.text('Your Real Sign Is ' + scores.winner);
     $quiz.toggle();
