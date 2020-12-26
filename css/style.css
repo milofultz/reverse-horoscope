@@ -1,0 +1,87 @@
+/* Sitewide Rules */
+
+html, body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+fieldset {
+  border: none;
+}
+
+legend {
+  display: none;
+}
+
+/* Utility Classes */
+
+.container {
+  display: grid;
+  /* grid-auto-rows: minmax(100px, auto); */
+  place-items: center;
+  max-width: 700px;
+  padding: 0 4em;
+  margin: 4em auto;
+  height: auto;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+/* Semantic Classes */
+
+.navbar {
+  margin: 1.5em 2em;
+}
+
+.title-screen {
+  margin: auto;
+  place-items: center;
+}
+
+.title {
+  font-size: 6em;
+  /* padding: 0 1em; */
+}
+
+.description {
+  font-style: italic;
+  /* margin: 2em 0; */
+}
+
+.question-container {
+  margin-bottom: 1em;
+}
+
+.question-header {
+  font-size: 1.5em;
+  color: #ccc;
+}
+
+.question-text {
+  font-size: 1.3em;
+  font-style: italic;
+  text-align: justify;
+  line-height: 1.3;
+  border-left: 10px solid #ccc;
+  margin: 1.75em auto;
+  padding: 0 10px;
+  width: 100%;
+}
+
+.input-container {
+  display: grid;
+  justify-content: center;
+}
+
+.question-label {
+  padding: 1em;
+}
