@@ -76,7 +76,7 @@ $(document).ready(function () {
         // multiply this by previous sign percentage
       // set birthday to start + adjustment
     // Generate graph elements
-    $resultsTitle.text('Your Real Sign Is ' + scores.winner);
+    $resultsTitle.text('Your Real Sign Is ' + scores.winner + '!');
     $quiz.toggle();
     $results.toggle();
   });
