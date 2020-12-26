@@ -30,32 +30,8 @@ $(document).ready(function () {
   // Set event listeners (providing appropriate handlers as input)
   $quizStartButton.on('click', function (event) {
     $quizForm.html('');
-    // Pull a random horoscope from each sign
-    var quizHoroscopes = [];
-    for (sign in horoscopesText) {
-      var index = Math.floor(Math.random() * horoscopesText[sign].length);
-      var signObj = {};
-      signObj[sign] = horoscopesText[sign][index];
-      quizHoroscopes.push(signObj);
-    }
-    // Shuffle their order
-    quizHoroscopes = shuffleArray(quizHoroscopes);
-    // Generate all questions and give each question a unique ID for calculating later
-    for (var i = 0; i < quizHoroscopes.length; i++) {
-      var number = i + 1
-      var horoscopeText = Object.values(quizHoroscopes[i])[0];
-      var horoscopeSign = Object.keys(quizHoroscopes[i])[0];
-      var $questionContainer = $('<fieldset class="question-container"></fieldset>');
-      var $questionHeader = $('<legend class="question-header" id="question-#-header">Question ' + number + ' of 12</legend>');
-      var $questionText = $('<div class="question-text" id="question-' + number + '-text"></div>');
-      $questionText.text(horoscopeText);
-      var $questionInput = $('<label for="question-' + number + '">How much does this sound like you?</label><input type="range" min="1" max="100" value="50" data-sign="' + horoscopeSign + '" class="range-slider" id="question-' + number + '" name="question-' + number + '"></input>')
-      $questionContainer.appendTo($quizForm);
-      $questionHeader.appendTo($questionContainer);
-      $questionText.appendTo($questionContainer);
-      $questionInput.appendTo($questionContainer);
-    }
-    // Display them all
+    var quizHoroscopes = getRandomHoroscopes();
+    generateAndAddQuestions(quizHoroscopes);
     $titleScreen.toggle();
     $quiz.toggle();
   });
@@ -71,6 +47,35 @@ $(document).ready(function () {
     $quiz.toggle();
     $results.toggle();
   });
+
+  var getRandomHoroscopes = function () {
+    var quizHoroscopes = [];
+    for (sign in horoscopesText) {
+      var index = Math.floor(Math.random() * horoscopesText[sign].length);
+      var signObj = {};
+      signObj[sign] = horoscopesText[sign][index];
+      quizHoroscopes.push(signObj);
+    }
+    return quizHoroscopes;
+  }
+
+  var generateAndAddQuestions = function (horoscopes) {
+    horoscopes = shuffleArray(horoscopes);
+    for (var i = 0; i < horoscopes.length; i++) {
+      var number = i + 1
+      var horoscope = Object.values(horoscopes[i])[0];
+      var sign = Object.keys(horoscopes[i])[0];
+      var $questionContainer = $('<fieldset class="question-container"></fieldset>');
+      var $questionHeader = $('<legend class="question-header" id="question-' + number + '-header">Question ' + number + ' of 12</legend>');
+      var $questionText = $('<div class="question-text" id="question-' + number + '-text"></div>');
+      $questionText.text(horoscope);
+      var $questionInput = $('<label for="question-' + number + '">How much does this resonate with you today?</label><input type="range" min="1" max="100" value="50" data-sign="' + sign + '" class="range-slider" id="question-' + number + '" name="question-' + number + '"></input>')
+      $questionContainer.appendTo($quizForm);
+      $questionHeader.appendTo($questionContainer);
+      $questionText.appendTo($questionContainer);
+      $questionInput.appendTo($questionContainer);
+    }
+  }
 
   var shuffleArray = function (array) {
     var endIndex, hold, index;
