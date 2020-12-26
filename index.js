@@ -21,7 +21,7 @@ $(document).ready(function () {
   // Main:Results
   var $results = $('<section class="container" id="results"></section>');
   var $resultsTitle = $('<h1 class="title" id="results-title"></h1>');
-  var $resultsBirthday = $('<h2 class="description" id="results-birthday">Birthday: Month Day</h2>');
+  var $resultsBirthday = $('<h2 class="description" id="results-birthday"></h2>');
   var $resultsConstellation = $('<img src="" class="constellation" id="results-constellation" />');
   var $resultsGraph = $('<div class="chart-container" id="chart-container"></div>');
 
@@ -62,21 +62,12 @@ $(document).ready(function () {
 
   $quizSubmit.on('click', function (event) {
     var scores = getScores();
-    // get "real" birthday
-      // make object of start and end days in Dates for each sign
-      // get day in between start and end for winning month
-      // find which "side" of winning sign is higher
-      // if previous month is higher
-        // divide total days availble for sign
-        // divide this by half
-        // multiply this by previous sign percentage and make negative
-      // if next
-        // divide total days availble for sign
-        // divide this by half
-        // multiply this by previous sign percentage
-      // set birthday to start + adjustment
+    var birthday = makeBirthday(scores.winner, scores.percentResults);
     // Generate graph elements
     $resultsTitle.text('Your Real Sign Is ' + scores.winner + '!');
+    $resultsBirthday.text('You should have been born on ' +
+                          getMonthName(birthday.getMonth()) + ' ' +
+                          birthday.getDate() + '.');
     $quiz.toggle();
     $results.toggle();
   });
@@ -112,51 +103,68 @@ $(document).ready(function () {
         highestScore = quizAnswers[el];
       }
     });
-    // get adjusted averages by adding some of adjacent signs
+    // get adjusted averages by adding adjacent signs
     var adjustedScores = {};
     for (var i = 0; i < horoscopeSignsOrdered.length; i++) {
       var sign = horoscopeSignsOrdered[i];
-      adjustedScores[sign] = quizAnswers[sign];
-      var previous = horoscopeSignsOrdered[Math.abs((i - 1) % 12)];
-      var next = horoscopeSignsOrdered[(i + 1) % 12];
-      adjustedScores[sign] += 0.1 * quizAnswers[previous];
-      adjustedScores[sign] += 0.1 * quizAnswers[next];
+      var lastSign = horoscopeSignsOrdered[(12 + i - 1) % 12];
+      var nextSign = horoscopeSignsOrdered[(i + 1) % 12];
+      adjustedScores[sign] = quizAnswers[sign] +
+                             0.1 * quizAnswers[lastSign] +
+                             0.1 * quizAnswers[nextSign];
     }
     // get scores in percent
-    var totalScores = Object.values(adjustedScores).reduce(function (total, el) {
-      return total + el;
-    });
+    var totalScores = Object.values(adjustedScores).reduce(getSum);
     var resultsInPercent = {};
-    var remainingPercentages = {};
-    for (var i = 0; i < horoscopeSignsOrdered.length; i++) {
-      var sign = horoscopeSignsOrdered[i];
+    var remainingPercentages = [];
+    for (sign in adjustedScores) {
       var percent = (adjustedScores[sign] / totalScores) * 100;
       resultsInPercent[sign] = Math.floor(percent);
-      remainingPercentages[sign] = percent - resultsInPercent[sign];
+      var remaining = {};
+      remaining[sign] = percent - resultsInPercent[sign];
+      remainingPercentages.push(remaining);
     }
-    var difference = 100 - Object.values(resultsInPercent).reduce(function (total, el) {
-      return total + el;
+    var difference = 100 - Object.values(resultsInPercent).reduce(getSum);
+    remainingPercentages.sort(function (a, b) {
+      return Object.values(a)[0] - Object.values(b)[0];
     });
-    var localRemainingPercentages = JSON.parse(JSON.stringify(remainingPercentages));
-    while (difference > 0) {
-      var highestSign = '';
-      var highestNum = 0;
-      for (var i = 0; i < horoscopeSignsOrdered.length; i++) {
-        var sign = horoscopeSignsOrdered[i];
-        if (localRemainingPercentages[sign] > highestNum) {
-          highestSign = sign;
-          highestNum = remainingPercentages[sign];
-        }
-      }
-      delete localRemainingPercentages[highestSign];
-      resultsInPercent[highestSign]++;
-      difference--;
+    for (var i = 0; i < difference; i++) {
+      var sign = Object.keys(remainingPercentages)[i];
+      resultsInPercent[sign]++;
     }
 
     var scores = {};
     scores.winner = winner;
     scores.percentResults = resultsInPercent;
     return scores;
+  }
+
+  var getSum = function (a, b) {
+    return a + b;
+  };
+
+  var makeBirthday = function (sign, percents) {
+    var midpoint = new Date(ms=((horoscopeDates[sign].end - horoscopeDates[sign].start) / 2)).getTime();
+    var signIndex = horoscopeSignsOrdered.indexOf(sign);
+    var lastSign = horoscopeSignsOrdered[(12 + signIndex - 1) % 12];
+    var nextSign = horoscopeSignsOrdered[(signIndex + 1) % 12];
+    if (percents[lastSign] > percents[nextSign]) {
+      var offset = midpoint - ((1/percents[lastSign]) * midpoint);
+    } else {
+      var offset = midpoint + (1/percents[nextSign]) * midpoint;
+    }
+    // set birthday to start + adjustment
+    var birthday = new Date(ms=(horoscopeDates[sign]['start'].getTime() + offset));
+    return birthday;
+  }
+
+  var getMonthName = function(num) {
+    var months = [
+      "January", "February", "March", "April", "May",
+      "June", "July", "August", "September", "October",
+      "November", "December"
+    ];
+    return months[num];
   }
 
   // Append new HTML elements to the DOM

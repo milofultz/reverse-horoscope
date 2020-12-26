@@ -13,6 +13,57 @@ var horoscopeSignsOrdered = [
     "Pisces"
 ];
 
+var horoscopeDates = {
+    Aries: {
+        start: new Date(1970, 2, 20),
+        end: new Date(1970, 3, 20)
+    },
+    Taurus: {
+        start: new Date(1970, 3, 20),
+        end: new Date(1970, 4, 21)
+    },
+    Gemini: {
+        start: new Date(1970, 4, 21),
+        end: new Date(1970, 5, 21)
+    },
+    Cancer: {
+        start: new Date(1970, 5, 21),
+        end: new Date(1970, 6, 23)
+    },
+    Leo: {
+        start: new Date(1970, 6, 23),
+        end: new Date(1970, 7, 23)
+    },
+    Virgo: {
+        start: new Date(1970, 7, 23),
+        end: new Date(1970, 8, 23)
+    },
+    Libra: {
+        start: new Date(1970, 8, 23),
+        end: new Date(1970, 9, 23)
+    },
+    Scorpio: {
+        start: new Date(1970, 9, 23),
+        end: new Date(1970, 10, 22)
+    },
+    Sagittarius: {
+        start: new Date(1970, 10, 22),
+        end: new Date(1970, 11, 22)
+    },
+    Capricorn: {
+        start: new Date(1970, 11, 22),
+        end: new Date(1971, 0, 20)
+    },
+    Aquarius: {
+        start: new Date(1970, 0, 20),
+        end: new Date(1970, 1, 18)
+    },
+    Pisces: {
+        start: new Date(1970, 1, 18),
+        end: new Date(1970, 2, 20)
+    }
+}
+
 var horoscopesText = {
     "Aquarius": [
         "There's not only an AM/PM split, but a mood division too. Creatively you'll be on top form and able to impress people with your vision. Emotionally, however, you could tend towards being brusque and dismissive. If you want others to listen and agree, then you'll need to draw on every ounce of tact!",
