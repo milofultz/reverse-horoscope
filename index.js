@@ -106,12 +106,12 @@ $(document).ready(function () {
     // get highest score
     var winner = '';
     var highestScore = 0;
-    for (var i = 0; i < horoscopeSignsOrdered.length; i++) {
-      if (quizAnswers[horoscopeSignsOrdered[i]] > highestScore) {
-        winner = horoscopeSignsOrdered[i];
-        highestScore = quizAnswers[horoscopeSignsOrdered[i]];
+    Object.keys(quizAnswers).forEach(function (el) {
+      if (quizAnswers[el] > highestScore) {
+        winner = el;
+        highestScore = quizAnswers[el];
       }
-    }
+    });
     // get adjusted averages by adding some of adjacent signs
     var adjustedScores = {};
     for (var i = 0; i < horoscopeSignsOrdered.length; i++) {
