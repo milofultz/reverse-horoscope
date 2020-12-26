@@ -6,12 +6,12 @@ $(document).ready(function () {
 
   // Header
   var $header = $('<header></header>');
-  var $nav = $('<nav><ul class="nav-list" id="nav-list"><li class="nav-list-item" id="nav-list-about">About</li></ul></nav>');
+  var $nav = $('<nav class="text-right navbar" id="navbar"><ul class="nav-list" id="nav-list"><li class="nav-list-item" id="nav-list-about">About</li></ul></nav>');
   // Main
   var $main = $('<main></main>');
   // Main:Title Screen
-  var $titleScreen = $('<section class="title-screen container" id="title-screen"></section>');
-  var $mainTitle = $('<h1 class="title" id="main-title">What\'s Your Actual Sign?</h1>');
+  var $titleScreen = $('<section class="container title-screen text-center" id="title-screen"></section>');
+  var $mainTitle = $('<h1 class="title" id="main-title">What\'s Your<br>Actual Sign?</h1>');
   var $mainDescription = $('<h2 class="description" id="main-description">Discover when you should have been born</h2>');
   var $quizStartButton = $('<div class="button-container" id="quiz-start-button-container"><button class="button" id="quiz-start-button" value="Start">Start</button></div>');
   // Main:Quiz
@@ -66,10 +66,10 @@ $(document).ready(function () {
       var horoscope = Object.values(horoscopes[i])[0];
       var sign = Object.keys(horoscopes[i])[0];
       var $questionContainer = $('<fieldset class="question-container"></fieldset>');
-      var $questionHeader = $('<legend class="question-header" id="question-' + number + '-header">Question ' + number + ' of 12</legend>');
+      var $questionHeader = $('<legend id="question-' + number + '-legend">Question ' + number + ' of 12</legend><h3 class="question-header text-center" id="question-' + number + 'header">' + number + ' / 12</h3>');
       var $questionText = $('<div class="question-text" id="question-' + number + '-text"></div>');
       $questionText.text(horoscope);
-      var $questionInput = $('<label for="question-' + number + '">How much does this resonate with you today?</label><input type="range" min="1" max="100" value="50" data-sign="' + sign + '" class="range-slider" id="question-' + number + '" name="question-' + number + '"></input>')
+      var $questionInput = $('<div class="input-container"><label class="question-label text-center" for="question-' + number + '">How much does this resonate with you today?</label><br><input type="range" min="1" max="7" value="4" data-sign="' + sign + '" class="range-slider" id="question-' + number + '" name="question-' + number + '"></input></div>')
       $questionContainer.appendTo($quizForm);
       $questionHeader.appendTo($questionContainer);
       $questionText.appendTo($questionContainer);
