@@ -1,20 +1,20 @@
 var horoscopeSignsOrdered = [
-    "aries",
-    "taurus",
-    "gemini",
-    "cancer",
-    "leo",
-    "virgo",
-    "libra",
-    "scorpio",
-    "sagittarius",
-    "capricorn",
-    "aquarius",
-    "pisces"
+    "Aries",
+    "Taurus",
+    "Gemini",
+    "Cancer",
+    "Leo",
+    "Virgo",
+    "Libra",
+    "Scorpio",
+    "Sagittarius",
+    "Capricorn",
+    "Aquarius",
+    "Pisces"
 ];
 
 var horoscopesText = {
-    "aquarius": [
+    "Aquarius": [
         "There's not only an AM/PM split, but a mood division too. Creatively you'll be on top form and able to impress people with your vision. Emotionally, however, you could tend towards being brusque and dismissive. If you want others to listen and agree, then you'll need to draw on every ounce of tact!",
         "There's a corrective vibe at work. It is likely to be very faint and hard to pin down. That said; you are likely to be more attuned to it than most. This may be useful, since an exchange at some point in the day could be linked back to something forgotten or overlooked in recent times!",
         "Yesterday's fiery zest is likely to give way to thin-skinned sensitivity today. Comments that you'd normally brush off with a laugh may cause you minor stress. The trick is to remember that you'll perhaps overreact to what is nothing more than good-humored banter!",
@@ -36,7 +36,7 @@ var horoscopesText = {
         "There's a hint of incoming news at some point and a very minor complication may emerge out of it. It may well be that you need to take a backward step or a slower pace in one key area of your life. If you have to shelve a plan don't worry too much: today's slippery vibe will fade!",
         "There's maybe a touch of 'the day after.' It may be that there's some explaining or backtracking to do. If you're the one doing the explaining, do it soon, but if you're on the receiving end, have patience. Be receptive to the little hints that point to a warm vibe this evening!"
     ],
-    "aries": [
+    "Aries": [
         "The spotlight is on you, and normally you'd delight in all the attention, but on a day where lunar influences go from dazzling to confusing, you may well feel a lot happier if you can claim a bit of thinking time. There is a great deal of progress to be made if you can just find the space!",
         "A new face is destined to appear on the scene for you today, and this someone could turn out to be a good friend and confidante. This person will be almost your opposite: introverted, quiet, shy, and who tends to be fretful, but you'll soon take them under your wing!",
         "The fabulous sun/moon aspect is likely to make you feel highly emotional, but in a highly positive way, especially when it comes to romantic matters. For singles there could be what is typically described as a charged atmosphere in the workplace. That said; keep work and romance as far apart as possible!",
@@ -58,7 +58,7 @@ var horoscopesText = {
         "Improved influences have the capacity to ease the pressure, more or less all-round. That said; the planetary impact on romantic matters may be a little hit-and-miss, since a need for some independence is likely to make you appear a little chilly. Just bear in mind that it will be easy to strike a false note!",
         "It's perhaps a day to enjoy the easier, if impulsive vibe. However; do keep one eye open for any minor but unexpected developments, since there may be a brief opening of some kind. It's certainly not a day to ignore something that has the potential to be quite significant!"
     ],
-    "cancer": [
+    "Cancer": [
         "You should find that today's planetary changes bode well for your friendships and for one relationship in particular. Speaking out on behalf of one individual may well provide an important turning point you, as you will be regarded in a new and fresh light by someone who matters!",
         "Knowing when and where to draw the line may not be as easy as it sounds, especially if work-related deadlines are involved. It may not be as straightforward as switching off and walking away. If the pressure is building, then you may need to find a different way to keep going!",
         "Planetary transits are likely to facilitate creative and thoughtful ideas; they may well pave the way for a slight boost on the work/career front. However; what is most likely to work is a step-by-step approach. The idea of backtracking a little may seem unappealing, but sometimes the end result of a second chance is better than the original!",
@@ -80,7 +80,7 @@ var horoscopesText = {
         "It's a day where your prevailing mood may be a little intense. Because of this you're likely to blow hot and cold with those whose responses may seem frustratingly casual. In addition; you may need to bite your tongue as the inclination to tell it like it is becomes overwhelming!",
         "A slightly pressured vibe may well point you in the wrong direction. There's a tendency to attribute far too much importance to trivial developments. The more time you expend on this, the harder it will be to catch up in other areas. By the same token, take extra care with verbally-based agreements"
     ],
-    "capricorn": [
+    "Capricorn": [
         "There's a slightly high-maintenance vibe about, particularly in the emotional zone. Getting to the root of one particular matter may require a rethink on your part. As an aside; minor but good news could lift your mood, but don't let it distract you from dealing with more immediate problems!",
         "It may be wise to deflect the effects of today's planetary shifts, which impact on material and financial matters. Don't be too adventurous; stick with what you know. Creatively you'll be on a roll, but financially you will really need to keep that burgeoning surge of confidence under some control!",
         "A prickly vibe may seem to materialize out of nowhere. You may need to guard against being slightly too critical with others in your immediate circle. You may also need to take steps to reverse a rather stubborn mood too. It's definitely not a day to try and exert too much control or influence over others!",
@@ -102,7 +102,7 @@ var horoscopesText = {
         "One challenging lunar aspect, which moves in this evening, suggests that you'll feel at odds with yourself. Normally an earth-centered sign you're likely to feel tempted to break out of your normal routine or change your image, but you should hold off on making any rash decisions for today!",
         "Planetary transits may well bring a mix of opportunities and minor obstacles. If you try to accept every challenge, complete every opportunity and tackle every development, you could end the day with an unfeasible to-do list. You may need to be a little more selective!"
     ],
-    "gemini": [
+    "Gemini": [
         "The sun is currently exerting a lot of influence, making this one of those rather annoying days full of contradictions. Impulsive reactions should be resisted, especially on the work-front, but it's possible that someone will try to hurry you along into making a rash decision. Tread carefully!",
         "It's a day to prioritize your current commitments, since there may well be one or two loose ends to tie up.  Don't assume that everything is ticking along smoothly, either. Whatever you do, don't over-extend yourself to something just to make yourself look good, because this is likely to rebound on you!",
         "Take extra care with snap responses and judgments. Although the overriding vibe may feel stodgy, there's a propensity to dismiss a positive offer or suggestion as a negative one. It may sound counterproductive, but it may help to set your sights a little lower for a brief time!",
@@ -124,7 +124,7 @@ var horoscopesText = {
         "You will find that you're concentrating on your social life after the last couple of challenging days. Not only will you be in need of company you'll also be in the mood for some fun too, which is long overdue. Take your friends bowling or out for a pizza and make the most of the evening!",
         "Cash matters look poorly-aspected. It might be that you want to make the most of the weekend, but before you do anything you might be wise to sit down with a pen and paper and work out exactly what you have in the way of spare cash. Don't overspend and you'll have a worry-free day!"
     ],
-    "leo": [
+    "Leo": [
         "Communications could be a little sloppy or not entirely based in fact, thanks to a sun/moon combination. An objective, no-nonsense attitude will make short work of any minor problem, but beware of overstating the case to make your point; sometimes it's best to speak the truth gently!",
         "As the moon starts to shed some of its negative vibes, it brings some very welcome energies your way. You are already a naturally generous individual, but today you will be driven to seek out those around who may be in need of some cheering up. Their smile will be more than enough of a reward!",
         "The AM/PM split will have an up-side and a down-side when it comes to practical and material matters. While the morning is likely to see you erring on the side of caution, the afternoon may bring a much freer vibe, but one where you may be tempted to test the metaphorical boundaries a little too much!",
@@ -146,7 +146,7 @@ var horoscopesText = {
         "Today has the capacity to offer some useful opportunities within a more contained vibe. If there is a chance to boost your income, then take it, but only if there is no risk and/or anxiety involved. The same applies if a temporary role of responsibility becomes available on the work front!",
         "The fiery moon will supply a boost on two fronts: there'll be a surge of confidence and a surge of will-power. Use this combination for the good. Re-introduce some balance and restore what may be lacking or missing. The only downside to the vibe is a slight tendency to coast!"
     ],
-    "libra": [
+    "Libra": [
         "The morning's marginally blunt, outspoken vibe could feel a little judgmental. Plain-spoken communications are likely to irk you. However, there's a strong possibility that a direct rebuttal or response may well bring about some long overdue improvements in the long run!",
         "Thanks to a subtly resistant vibe, it's likely to be a day where you'll find it more difficult to commit to anything that is too specific or too final. There may be an element of trying to keep your options open. That said; a visible lack of effort, for whatever reason, is likely to rebound in a few days' time!",
         "The full moon is likely to amplify your perfectionist traits, which will have the potential to assist the work/career front. That said; you might be a little less accommodating than usual. Take care how far you push this: the intense vibe will be affecting others in all sorts of subtle ways too!",
@@ -168,7 +168,7 @@ var horoscopesText = {
         "Money matters are looking particularly spectacular today, thanks to a very beneficial planetary formation. It could be a lucky win that boosts your finances, or an overdue reward for some hard work, but whatever it is don't let it just slip through your fingers, Libra; save it!",
         "There is a double whammy to negotiate today: a need for excitement may well override your natural caution, and a friend could pour cold water on certain plans. It might be wise to sit down with your friend in order to get to the nub of the matter and it might be wise to limit your quest for excitement just for now!"
     ],
-    "pisces": [
+    "Pisces": [
         "Communications are very well aspected, which will make it a good day a great day for catching up and getting ahead of yourself. You're also likely to be on the receiving end of some good or reassuring news. All that said; take extra care when it comes to material and financial matters!",
         "The Moon makes itself known in your life today. Thanks to other planetary alignments this combination makes today an excellent day for moving things forward in your love life. There is a suggestion that there may have been some harsh words lately, now is the time to make things right again!",
         "Your cautious mood of yesterday is likely to continue, thanks to a Mars/Sun combination. While you won't be spending money like it grows on trees you won't feel any more secure by holding onto it. Let your hair down and arrange some fun that won't break the bank!",
@@ -190,7 +190,7 @@ var horoscopesText = {
         "You may need to circumvent a slight air of resistance when it comes to a personal matter, which may resurface with a slight shift in perspective. All that said; it's possible that a minor development will steer you into a course of action that you perhaps wouldn't have otherwise considered!",
         "On an emotional level it should be a much easier day than of late. Certain issues that may have been bubbling to the surface should ease off. Reoccurring problems may well appear a lot more manageable, although you may need to bear in mind that some things might need to be deferred for another day!"
     ],
-    "sagittarius": [
+    "Sagittarius": [
         "You're likely to have one of those days where you're slightly out of synch with others. What is said may not match what is actually done. While it may be difficult to express your feelings, especially if there's a slight disappointment, try to remember that a miscommunication is the real problem!",
         "Fabulous influences may well lead to one or two lucky breaks and even if there are any minor obstacles to overcome, the planets are nicely configured to give you that extra little push. It's definitely a day where you should take the longer term view and believe that anything is possible!",
         "The lunar influences zoom in on your social zone, placing the emphasis on relationships. That said; communications are poorly aspected and there is a good chance that you could miss or overlook a message or forget to return a call. A part of the problem may well be taking someone slightly for granted!",
@@ -212,7 +212,7 @@ var horoscopesText = {
         "You can take advantage of a relatively settled day, so long as you pay attention to the definite shifts in the general vibe. Keeping a strong sense of your goal in mind will help, and don't give up if it gets a little tricky. A minor challenge may feel irritating, but it could be useful!",
         "Romance is definitely in the air, whether you're single or attached! You might find that you need to do some quick thinking, and you'll need to be quite resourceful when it comes to creating the right mood, thanks to certain financial constraints, but you should still be able to enjoy a fabulous evening!"
     ],
-    "scorpio": [
+    "Scorpio": [
         "Communications are a little unpredictable and this may impact on romance. You'll be in the mood for some superficial chit-chat but you won't be in the mood to reveal too much about yourself. Try and overcome a slight chill, or you could send out very confusing mixed messages!",
         "Rarely for you, it's perhaps a day that calls for a little willpower, since there is a propensity to over-estimate your capabilities. Don't readily commit to extra duties/tasks unless you really have to. It may also be a good idea to set a time-limit when it comes to a possibly complicated matter!",
         "There may be a slight tendency to dwell too much on a marginally fretful situation. It's possible that this situation won't be as bad as you assume.  That said; it may not be entirely within your control. It's perhaps a day to accept there are just some things you can't fix immediately!",
@@ -234,7 +234,7 @@ var horoscopesText = {
         "You are likely to be feeling a little frustrated, especially when it comes to being able to express yourself. However, it's not a day to try and influence other people's views and feelings. It may be tempting to 'speed up' a particular process, but hold off for just a little while!",
         "It's an easier day than yesterday to an extent. Money still needs a careful eye, but the opportunity to grab some fun moments is there, as long as you stop fretting about remote possibilities and focus instead on the here and now. Romance will have a chance to take off!"
     ],
-    "taurus": [
+    "Taurus": [
         "Given that it's a week where some decisions may seem a little complicated with too much distracting detail, you may want to consider waiting for a week or so before you implement any irreversible changes. Do avoid taking the easiest routes just to save time and energy, and don't be disheartened by a slight setback.",
         "If you make this a day of action, then you will manage to side-step the heavier planetary influences. If you make this a day of words, you probably won't! Communications are unreliable today, so if something goes wrong or off-track, then opt to put it right, rather than waste time explaining or clarifying!",
         "It's a thought-provoking day. Shrewd planetary shifts point to useful disclosures and positive discoveries that will certainly give you something to think about. Alternatively, you experience a moment of clarity over something that may have been troubling you. Keep an open mind!",
@@ -256,7 +256,7 @@ var horoscopesText = {
         "Do bear in mind that a slightly selfish vibe could bring about a minor conflict from the afternoon onwards. You could inadvertently blunder when it comes to a verbal exchange, which in turn could impact on romantic matters in a day or so. It's definitely a time to watch what you say!",
         "The overriding mood for today is likely to feel a great deal less pressured. However, you may not be able to let go of something that others regard as quite trivial or unimportant. If you let it, this could actually eat into your time. It's certainly a day to draw a metaphorical line!"
     ],
-    "virgo": [
+    "Virgo": [
         "You're in line for a rather fabulous day today, thanks to a string of beneficial aspects, which are suggesting that you throw caution to the wind and do something different and out of the ordinary. You'll also be in an extremely sociable mood, so get on the phone and get your friends involved too!",
         "A slightly erratic vibe could create slight misunderstandings in your work-based relationships. You may feel that someone is perhaps being a little too cavalier or offhand. You may just need to accept that it's not a great day to confront those particular individuals!",
         "The current influences suggest two things: one: that a tendency to worry or fret should be replaced with a tendency to look on the bright side, and two; that you may now be prepared to take a bit of a gamble over 'bending the rules' slightly. A certain amount of caution wouldn't go amiss!",
