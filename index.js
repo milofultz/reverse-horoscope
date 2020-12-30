@@ -17,7 +17,7 @@ $(document).ready(function () {
   // Main:Quiz
   var $quiz = $('<section class="container" id="quiz"></section>');
   var $quizForm = $('<form action="" id="quiz-form"></form>'); // all q's dynamically generated
-  var $quizSubmit = $('<div class="button" id="quiz-submit-button">Submit</div>');
+  var $quizSubmit = $('<div class="button" id="quiz-submit-button">Submit</div>').toggle();
   // Main:Results
   var $results = $('<section class="container" id="results"></section>');
   var $resultsTitle = $('<h1 class="title" id="results-title"></h1>');
@@ -30,8 +30,14 @@ $(document).ready(function () {
   // Set event listeners (providing appropriate handlers as input)
   $quizStartButton.on('click', function (event) {
     $quizForm.html('');
-    var quizHoroscopes = getRandomHoroscopes();
-    generateAndAddQuestions(quizHoroscopes);
+
+    var addNextQuestionToQuiz = generateQuestions();
+    addNextQuestionToQuiz();
+
+    var $nextButton = $('<div class="button next-question" id="next-question">Next</div>');
+    $nextButton.on('click', addNextQuestionToQuiz);
+    $nextButton.appendTo($quiz);
+
     $titleScreen.toggle();
     $quiz.toggle();
   });
@@ -40,13 +46,45 @@ $(document).ready(function () {
     var scores = getScores();
     var birthday = makeBirthday(scores.winner, scores.percentResults);
     // Generate graph elements
+
     $resultsTitle.text('Your Real Sign Is ' + scores.winner + '!');
     $resultsBirthday.text('You should have been born on ' +
                           getMonthName(birthday.getMonth()) + ' ' +
                           birthday.getDate() + '.');
+    // Append graph elements
     $quiz.toggle();
     $results.toggle();
   });
+
+  var generateQuestions = function () {
+    horoscopes = shuffleArray(getRandomHoroscopes());
+    questions = [];
+    for (var i = 0; i < horoscopes.length; i++) {
+      var number = i + 1
+      var horoscope = Object.values(horoscopes[i])[0];
+      var sign = Object.keys(horoscopes[i])[0];
+      var $questionContainer = $('<fieldset class="question-container" id="question-' + number + '"></fieldset>');
+      var $questionHeader = $('<legend id="question-' + number + '-legend">Question ' + number + ' of 12</legend><h3 class="question-header text-center" id="question-' + number + 'header">' + number + ' / 12</h3>');
+      var $questionText = $('<div class="question-text" id="question-' + number + '-text"></div>');
+      $questionText.text(horoscope);
+      var $questionInput = $('<div class="input-container"><label class="question-label text-center" for="question-' + number + '">How much does this resonate with you today?</label><br><input type="range" min="1" max="7" value="4" data-sign="' + sign + '" class="range-slider" id="question-' + number + '-answer" name="question-' + number + '"></input></div>')
+      $questionHeader.appendTo($questionContainer);
+      $questionText.appendTo($questionContainer);
+      $questionInput.appendTo($questionContainer);
+      questions.push($questionContainer);
+    }
+
+    var addNextQuestionToQuiz = function () {
+      $('#question-' + (12 - questions.length)).hide();
+      questions.shift().prependTo($quizForm);
+      if (questions.length === 0) {
+        $('#next-question').hide();
+        $quizSubmit.show();
+      }
+    };
+
+    return addNextQuestionToQuiz;
+  };
 
   var getRandomHoroscopes = function () {
     var quizHoroscopes = [];
@@ -57,25 +95,7 @@ $(document).ready(function () {
       quizHoroscopes.push(signObj);
     }
     return quizHoroscopes;
-  }
-
-  var generateAndAddQuestions = function (horoscopes) {
-    horoscopes = shuffleArray(horoscopes);
-    for (var i = 0; i < horoscopes.length; i++) {
-      var number = i + 1
-      var horoscope = Object.values(horoscopes[i])[0];
-      var sign = Object.keys(horoscopes[i])[0];
-      var $questionContainer = $('<fieldset class="question-container"></fieldset>');
-      var $questionHeader = $('<legend id="question-' + number + '-legend">Question ' + number + ' of 12</legend><h3 class="question-header text-center" id="question-' + number + 'header">' + number + ' / 12</h3>');
-      var $questionText = $('<div class="question-text" id="question-' + number + '-text"></div>');
-      $questionText.text(horoscope);
-      var $questionInput = $('<div class="input-container"><label class="question-label text-center" for="question-' + number + '">How much does this resonate with you today?</label><br><input type="range" min="1" max="7" value="4" data-sign="' + sign + '" class="range-slider" id="question-' + number + '" name="question-' + number + '"></input></div>')
-      $questionContainer.appendTo($quizForm);
-      $questionHeader.appendTo($questionContainer);
-      $questionText.appendTo($questionContainer);
-      $questionInput.appendTo($questionContainer);
-    }
-  }
+  };
 
   var shuffleArray = function (array) {
     var endIndex, hold, index;
@@ -86,7 +106,7 @@ $(document).ready(function () {
         array[endIndex] = hold;
     }
     return array;
-  }
+  };
 
   var getScores = function () {
     // Get answers
@@ -94,7 +114,7 @@ $(document).ready(function () {
     var quizAnswers = {};
     for (var i = 0; i < $quizInputs.length; i++) {
       var number = i + 1;
-      var $question = $('#question-' + number);
+      var $question = $('#question-' + number + '-answer');
       var questionSign = $question[0].dataset.sign;
       var questionScore = parseInt($question.val());
       quizAnswers[questionSign] = questionScore;
@@ -142,7 +162,7 @@ $(document).ready(function () {
     scores.winner = winner;
     scores.percentResults = resultsInPercent;
     return scores;
-  }
+  };
 
   var getSum = function (a, b) {
     return a + b;
@@ -161,7 +181,7 @@ $(document).ready(function () {
     // set birthday to start + adjustment
     var birthday = new Date(ms=(horoscopeDates[sign]['start'].getTime() + offset));
     return birthday;
-  }
+  };
 
   var getMonthName = function(num) {
     var months = [
@@ -170,7 +190,7 @@ $(document).ready(function () {
       "November", "December"
     ];
     return months[num];
-  }
+  };
 
   // Append new HTML elements to the DOM
 
