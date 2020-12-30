@@ -31,7 +31,8 @@ $(document).ready(function () {
   $quizStartButton.on('click', function (event) {
     $quizForm.html('');
 
-    var addNextQuestionToQuiz = generateQuestions();
+    var questions = generateQuestions();
+    var addNextQuestionToQuiz = makeQuizQuestionManager(questions);
     addNextQuestionToQuiz();
 
     var $nextButton = $('<div class="button next-question" id="next-question">Next</div>');
@@ -52,6 +53,7 @@ $(document).ready(function () {
                           getMonthName(birthday.getMonth()) + ' ' +
                           birthday.getDate() + '.');
     // Append graph elements
+
     $quiz.toggle();
     $results.toggle();
   });
@@ -74,16 +76,7 @@ $(document).ready(function () {
       questions.push($questionContainer);
     }
 
-    var addNextQuestionToQuiz = function () {
-      $('#question-' + (12 - questions.length)).hide();
-      questions.shift().prependTo($quizForm);
-      if (questions.length === 0) {
-        $('#next-question').hide();
-        $quizSubmit.show();
-      }
-    };
-
-    return addNextQuestionToQuiz;
+    return questions;
   };
 
   var getRandomHoroscopes = function () {
@@ -106,6 +99,17 @@ $(document).ready(function () {
         array[endIndex] = hold;
     }
     return array;
+  };
+
+  var makeQuizQuestionManager = function (questions) {
+    return function () {
+      $('#question-' + (12 - questions.length)).hide();
+      questions.shift().prependTo($quizForm);
+      if (questions.length === 0) {
+        $('#next-question').hide();
+        $quizSubmit.show();
+      }
+    }
   };
 
   var getScores = function () {
