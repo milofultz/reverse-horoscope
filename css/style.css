@@ -42,6 +42,14 @@ legend {
   margin: 1.5em 2em;
 }
 
+.nav-list {
+  list-style: none;
+}
+
+.nav-list-item {
+  cursor: pointer;
+}
+
 .title-screen {
   margin: auto;
   place-items: center;
@@ -55,6 +63,25 @@ legend {
 .description {
   font-style: italic;
   /* margin: 2em 0; */
+}
+
+.button {
+  padding: 0.5em 0.7em;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: rgb(0, 2, 143);
+  color: white;
+  text-transform: uppercase;
+  font-weight: bold;
+
+  transition-property: background-color;
+  transition-duration: 1s;
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: 0s;
+}
+
+.button:hover {
+  background-color: rgb(28, 56, 182);
 }
 
 .question-container {
