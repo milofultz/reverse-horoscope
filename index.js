@@ -24,11 +24,14 @@ $(document).ready(function () {
   var $resultsBirthday = $('<h2 class="description" id="results-birthday"></h2>');
   var $resultsConstellation = $('<img src="" class="constellation" id="results-constellation" />');
   var $resultsGraph = $('<div class="chart-container" id="chart-container"></div>');
+  var $resultsCtaButtons = $('<div class="cta-container" id="results-cta-buttons"></div>');
+  var $tryAgainButton = $('<div class="button" id="try-again-button">Try Again</div>');
+  var $shareButton = $('<div class="button" id="share-button">Share</div>');
 
   // Create event handler functions
 
-  // Set event listeners (providing appropriate handlers as input)
-  $quizStartButton.on('click', function (event) {
+  var startQuiz = function () {
+    $results.hide();
     $quizForm.html('');
 
     var questions = generateQuestions();
@@ -41,9 +44,9 @@ $(document).ready(function () {
 
     $titleScreen.toggle();
     $quiz.toggle();
-  });
+  };
 
-  $quizSubmit.on('click', function (event) {
+  var submitQuiz = function () {
     var scores = getScores();
     var birthday = makeBirthday(scores.winner, scores.percentResults);
     // Generate graph elements
@@ -56,7 +59,7 @@ $(document).ready(function () {
 
     $quiz.toggle();
     $results.toggle();
-  });
+  };
 
   var generateQuestions = function () {
     horoscopes = shuffleArray(getRandomHoroscopes());
@@ -196,6 +199,12 @@ $(document).ready(function () {
     return months[num];
   };
 
+  // Set event listeners (providing appropriate handlers as input)
+
+  $quizStartButton.on('click', startQuiz);
+  $quizSubmit.on('click', submitQuiz);
+  $tryAgainButton.on('click', startQuiz);
+
   // Append new HTML elements to the DOM
 
   // Hide later elements
@@ -220,6 +229,9 @@ $(document).ready(function () {
   $results.appendTo($main);
   $resultsTitle.appendTo($results);
   $resultsBirthday.appendTo($results);
-  $$resultsConstellation.appendTo($results);
+  $resultsConstellation.appendTo($results);
   $resultsGraph.appendTo($results);
+  $resultsCtaButtons.appendTo($results);
+  $tryAgainButton.appendTo($resultsCtaButtons);
+  $shareButton.appendTo($resultsCtaButtons);
 });
