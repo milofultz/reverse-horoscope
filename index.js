@@ -72,7 +72,7 @@ $(document).ready(function () {
       var $questionHeader = $('<legend id="question-' + number + '-legend">Question ' + number + ' of 12</legend><h3 class="question-header text-center" id="question-' + number + 'header">' + number + ' / 12</h3>');
       var $questionText = $('<div class="question-text" id="question-' + number + '-text"></div>');
       $questionText.text(horoscope);
-      var $questionInput = $('<div class="input-container"><label class="question-label text-center" for="question-' + number + '">How much does this resonate with you today?</label><br><input type="range" min="1" max="7" value="4" data-sign="' + sign + '" class="range-slider" id="question-' + number + '-answer" name="question-' + number + '"></input></div>')
+      var $questionInput = $('<div class="input-container"><label class="question-label text-center" for="question-' + number + '">How much does this resonate with you today?</label><br><input type="range" min="1" max="100" value="50" data-sign="' + sign + '" class="range-slider" id="question-' + number + '-answer" name="question-' + number + '"></input></div>')
       $questionHeader.appendTo($questionContainer);
       $questionText.appendTo($questionContainer);
       $questionInput.appendTo($questionContainer);
