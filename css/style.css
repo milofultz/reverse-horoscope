@@ -16,11 +16,11 @@ legend {
 
 .container {
   display: grid;
-  /* grid-auto-rows: minmax(100px, auto); */
+  grid-auto-rows: minmax(100px, auto);
   place-items: center;
   max-width: 700px;
   padding: 0 4em;
-  margin: 4em auto;
+  margin: auto;
   height: auto;
 }
 
@@ -48,11 +48,6 @@ legend {
 
 .nav-list-item {
   cursor: pointer;
-}
-
-.title-screen {
-  margin: auto;
-  place-items: center;
 }
 
 .title {
