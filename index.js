@@ -17,7 +17,7 @@ $(document).ready(function () {
   // Main:Quiz
   var $quiz = $('<section class="container" id="quiz"></section>');
   var $quizForm = $('<form action="" id="quiz-form"></form>'); // all q's dynamically generated
-  var $quizSubmit = $('<div class="button" id="quiz-submit-button">Submit</div>').toggle();
+  var $quizSubmit = $('<div class="button" id="quiz-submit-button">Submit</div>').hide();
   // Main:Results
   var $results = $('<section class="container" id="results"></section>');
   var $resultsTitle = $('<h1 class="title" id="results-title"></h1>');
@@ -42,8 +42,8 @@ $(document).ready(function () {
     $nextButton.on('click', addNextQuestionToQuiz);
     $nextButton.appendTo($quiz);
 
-    $titleScreen.toggle();
-    $quiz.toggle();
+    $titleScreen.hide();
+    $quiz.show();
   };
 
   var submitQuiz = function () {
@@ -57,8 +57,9 @@ $(document).ready(function () {
                           birthday.getDate() + '.');
     // Append graph elements
 
-    $quiz.toggle();
-    $results.toggle();
+    $quiz.hide();
+    $quizSubmit.hide();
+    $results.show();
   };
 
   var generateQuestions = function () {
@@ -109,7 +110,7 @@ $(document).ready(function () {
       $('#question-' + (12 - questions.length)).hide();
       questions.shift().prependTo($quizForm);
       if (questions.length === 0) {
-        $('#next-question').hide();
+        $('#next-question').remove();
         $quizSubmit.show();
       }
     }
