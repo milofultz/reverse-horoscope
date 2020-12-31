@@ -11,7 +11,7 @@ $(document).ready(function () {
   var $main = $('<main></main>');
   // Main:Title Screen
   var $titleScreen = $('<section class="container title-screen text-center" id="title-screen"></section>');
-  var $mainTitle = $('<h1 class="title" id="main-title">What\'s Your<br>Actual Sign?</h1>');
+  var $mainTitle = $('<h1 class="title" id="main-title">What\'s Your Actual Sign?</h1>');
   var $mainDescription = $('<h2 class="description" id="main-description">Discover when you should have been born</h2>');
   var $quizStartButton = $('<div class="button" id="quiz-start-button">Start</div>');
   // Main:Quiz
@@ -102,7 +102,7 @@ $(document).ready(function () {
   };
 
   var makeQuizQuestionManager = function (questions) {
-    // make a deep copy to not modify input array
+    // make a copy to not modify input array
     questions = questions.slice();
     return function () {
       $('#question-' + (12 - questions.length)).hide();
