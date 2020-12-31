@@ -114,6 +114,15 @@ $(document).ready(function () {
     };
   };
 
+  var swipeDisplay = function(currentElement, nextElement) {
+    // move current display to the right, out of frame
+    // animate opacity to 0.5 down as well
+    // show next
+    // move next display to the right, into frame
+    // start with opacity at 0.5, animate to 1
+    // hide old
+  };
+
   var getScores = function () {
     // Get answers
     var $quizInputs = $quizForm.find('input');
