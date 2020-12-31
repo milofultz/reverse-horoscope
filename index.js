@@ -34,8 +34,7 @@ $(document).ready(function () {
     $results.hide();
     $quizForm.html('');
 
-    var questions = generateQuestions();
-    var addNextQuestionToQuiz = makeQuizQuestionManager(questions);
+    var addNextQuestionToQuiz = makeQuizQuestionManager(generateQuestions());
     addNextQuestionToQuiz();
 
     var $nextButton = $('<div class="button next-question" id="next-question">Next</div>');
@@ -52,9 +51,7 @@ $(document).ready(function () {
     // Generate graph elements
 
     $resultsTitle.text('Your Real Sign Is ' + scores.winner + '!');
-    $resultsBirthday.text('You should have been born on ' +
-                          getMonthName(birthday.getMonth()) + ' ' +
-                          birthday.getDate() + '.');
+    $resultsBirthday.text('You should have been born on ' + getMonthName(birthday.getMonth()) + ' ' + birthday.getDate() + '.');
     // Append graph elements
 
     $quiz.hide();
@@ -79,7 +76,6 @@ $(document).ready(function () {
       $questionInput.appendTo($questionContainer);
       questions.push($questionContainer);
     }
-
     return questions;
   };
 
@@ -106,6 +102,8 @@ $(document).ready(function () {
   };
 
   var makeQuizQuestionManager = function (questions) {
+    // make a deep copy to not modify input array
+    questions = questions.slice();
     return function () {
       $('#question-' + (12 - questions.length)).hide();
       questions.shift().prependTo($quizForm);
@@ -113,7 +111,7 @@ $(document).ready(function () {
         $('#next-question').remove();
         $quizSubmit.show();
       }
-    }
+    };
   };
 
   var getScores = function () {
@@ -130,12 +128,12 @@ $(document).ready(function () {
     // get highest score
     var winner = '';
     var highestScore = 0;
-    Object.keys(quizAnswers).forEach(function (el) {
-      if (quizAnswers[el] > highestScore) {
-        winner = el;
-        highestScore = quizAnswers[el];
+    for (key in quizAnswers) {
+      if (quizAnswers[key] > highestScore) {
+        winner = key;
+        highestScore = quizAnswers[key];
       }
-    });
+    };
     // get adjusted averages by adding adjacent signs
     var adjustedScores = {};
     for (var i = 0; i < horoscopeSignsOrdered.length; i++) {
