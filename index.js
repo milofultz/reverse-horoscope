@@ -104,23 +104,34 @@ $(document).ready(function () {
   var makeQuizQuestionManager = function (questions) {
     // make a copy to not modify input array
     questions = questions.slice();
+
+    var showQuestion = function ($q) {
+      $q.css({ opacity: '0' }).show()
+      $q.animate({ opacity: '1' }, 500);
+    };
+    var hideQuestionAndShowNext = function ($q, $next) {
+      $q.animate({ opacity: '0' }, 500, function () {
+        $(this).hide()
+        showQuestion($next);
+      });
+    };
+
     return function () {
-      $('#question-' + (12 - questions.length)).hide();
-      questions.shift().prependTo($quizForm);
+      var $currentQuestion = $('#question-' + (12 - questions.length));
+      var $nextQuestion = questions.shift();
+      $nextQuestion.hide().prependTo($quizForm);
+
+      if ($currentQuestion[0] === undefined) {
+        showQuestion($nextQuestion);
+      } else {
+        hideQuestionAndShowNext($currentQuestion, $nextQuestion);
+      }
+
       if (questions.length === 0) {
         $('#next-question').remove();
         $quizSubmit.show();
       }
     };
-  };
-
-  var swipeDisplay = function(currentElement, nextElement) {
-    // move current display to the right, out of frame
-    // animate opacity to 0.5 down as well
-    // show next
-    // move next display to the right, into frame
-    // start with opacity at 0.5, animate to 1
-    // hide old
   };
 
   var getScores = function () {
