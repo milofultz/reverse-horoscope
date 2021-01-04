@@ -31,20 +31,22 @@ $(document).ready(function () {
   // Create event handler functions
 
   var startQuiz = function () {
-    $results.hide();
-    $quizForm.html('');
+    $results.animate({ opacity: '0'}, 350, function () {
+      $results.hide();
+      $quiz.show().animate({ opacity: '1'}, 350)
+      $quizForm.html('');
+    });
 
     var addNextQuestionToQuiz = makeQuizQuestionManager(generateQuestions());
+    var $nextButton = $('<div class="button next-question" id="next-question">Next</div>');
+    $nextButton.on('click', addNextQuestionToQuiz);
 
-    $titleScreen.animate({ opacity: '0' }, 500, function () {
+    $titleScreen.animate({ opacity: '0' }, 350, function () {
       $titleScreen.hide();
       $quiz.show();
       addNextQuestionToQuiz();
+      $nextButton.css('opacity', '0').appendTo($quiz).animate({ opacity: '1' }, 350);
     });
-
-    var $nextButton = $('<div class="button next-question" id="next-question">Next</div>');
-    $nextButton.on('click', addNextQuestionToQuiz);
-    $nextButton.appendTo($quiz);
   };
 
   var submitQuiz = function () {
@@ -56,9 +58,11 @@ $(document).ready(function () {
     $resultsBirthday.text('You should have been born on ' + getMonthName(birthday.getMonth()) + ' ' + birthday.getDate() + '.');
     // Append graph elements
 
-    $quiz.hide();
-    $quizSubmit.hide();
-    $results.show();
+    $quiz.animate({ opacity: '0'}, 350, function () {
+      $quiz.hide();
+      $quizSubmit.hide();
+      $results.show().animate({ opacity: '1'}, 350);
+    });
   };
 
   var generateQuestions = function () {
@@ -109,10 +113,10 @@ $(document).ready(function () {
 
     var showQuestion = function ($q) {
       $q.css({ opacity: '0' }).show()
-      $q.animate({ opacity: '1' }, 500);
+      $q.animate({ opacity: '1' }, 350);
     };
     var hideQuestionAndShowNext = function ($q, $next) {
-      $q.animate({ opacity: '0' }, 500, function () {
+      $q.animate({ opacity: '0' }, 350, function () {
         $(this).hide()
         showQuestion($next);
       });
