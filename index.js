@@ -35,14 +35,16 @@ $(document).ready(function () {
     $quizForm.html('');
 
     var addNextQuestionToQuiz = makeQuizQuestionManager(generateQuestions());
-    addNextQuestionToQuiz();
+
+    $titleScreen.animate({ opacity: '0' }, 500, function () {
+      $titleScreen.hide();
+      $quiz.show();
+      addNextQuestionToQuiz();
+    });
 
     var $nextButton = $('<div class="button next-question" id="next-question">Next</div>');
     $nextButton.on('click', addNextQuestionToQuiz);
     $nextButton.appendTo($quiz);
-
-    $titleScreen.hide();
-    $quiz.show();
   };
 
   var submitQuiz = function () {
