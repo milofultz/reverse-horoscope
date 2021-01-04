@@ -193,6 +193,13 @@ input[type=range] {
 
 .nav-list-item {
   cursor: pointer;
+  opacity: 0.7;
+  transition: all 0.3s ease-in-out;
+}
+
+.nav-list-item:hover {
+  opacity: 1;
+  text-shadow: #CCC 0 0 3px;
 }
 
 .title {
