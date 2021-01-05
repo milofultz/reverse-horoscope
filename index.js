@@ -21,7 +21,7 @@ $(document).ready(function () {
   var $quizForm = $('<form action="" id="quiz-form"></form>'); // all q's dynamically generated
   var $quizSubmit = $('<div class="button" id="quiz-submit-button">Submit</div>').hide();
   // Main:Results
-  var $results = $('<section class="container" id="results"></section>');
+  var $results = $('<section class="container text-center" id="results"></section>');
   var $resultsTitle = $('<h1 class="title" id="results-title"></h1>');
   var $resultsBirthday = $('<h2 class="description" id="results-birthday"></h2>');
   var $resultsConstellation = $('<img src="" class="constellation" id="results-constellation" />');
