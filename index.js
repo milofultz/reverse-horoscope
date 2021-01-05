@@ -25,7 +25,7 @@ $(document).ready(function () {
   var $resultsTitle = $('<h1 class="title" id="results-title"></h1>');
   var $resultsBirthday = $('<h2 class="description" id="results-birthday"></h2>');
   var $resultsConstellation = $('<img src="" class="constellation" id="results-constellation" />');
-  var $resultsGraph = $('<div class="chart-container" id="chart-container"></div>');
+  var $resultsChart = $('<div class="chart-container" id="chart-container"></div>');
   var $resultsCtaButtons = $('<div class="cta-container" id="results-cta-buttons"></div>');
   var $tryAgainButton = $('<div class="button" id="try-again-button">Try Again</div>');
   var $shareButton = $('<div class="button" id="share-button">Share</div>');
@@ -54,11 +54,10 @@ $(document).ready(function () {
   var submitQuiz = function () {
     var scores = getScores();
     var birthday = makeBirthday(scores.winner, scores.percentResults);
-    // Generate graph elements
 
     $resultsTitle.text('Your Real Sign Is ' + scores.winner + '!');
     $resultsBirthday.text('You should have been born on ' + getMonthName(birthday.getMonth()) + ' ' + birthday.getDate() + '.');
-    // Append graph elements
+    makeResultsChart(scores.percentResults);
 
     $quiz.animate({ opacity: '0'}, 350, function () {
       $quiz.hide();
@@ -226,6 +225,31 @@ $(document).ready(function () {
     return months[num];
   };
 
+  var makeResultsChart = function (signPercentages) {
+    // create table element
+    // create caption
+    // Append the caption to the table
+
+    // create table header
+    // create header row
+    // create header column for Sign with scope="col"
+    // create header column for Percentage with scope="col"
+    // Append the header columns to the row
+    // Append the header row to the header
+    // Append the header to the table
+
+    // create table body
+    // for each sign in the signPercentages
+      // create a row with scope="row"
+      // create a cell with inner text as the sign name (key)
+      // create a cell with inner text as the percentage (value)
+      // append these cells to the row
+      // append the row to the table body
+    // append the body to the table
+
+    // Append the table to the resultsChart div
+  }
+
   // Set event listeners (providing appropriate handlers as input)
 
   $quizStartButton.on('click', startQuiz);
@@ -264,7 +288,7 @@ $(document).ready(function () {
   $resultsTitle.appendTo($results);
   $resultsBirthday.appendTo($results);
   $resultsConstellation.appendTo($results);
-  $resultsGraph.appendTo($results);
+  $resultsChart.appendTo($results);
   $resultsCtaButtons.appendTo($results);
   $tryAgainButton.appendTo($resultsCtaButtons);
   $shareButton.appendTo($resultsCtaButtons);
