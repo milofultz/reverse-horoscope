@@ -187,7 +187,7 @@ $(document).ready(function () {
       return Object.values(a)[0] - Object.values(b)[0];
     });
     for (var i = 0; i < difference; i++) {
-      var sign = Object.keys(remainingPercentages)[i];
+      var sign = Object.keys(remainingPercentages[i])[0];
       resultsInPercent[sign]++;
     }
 
@@ -227,27 +227,48 @@ $(document).ready(function () {
 
   var makeResultsChart = function (signPercentages) {
     // create table element
+    var $table = $('<table class="results-chart charts-css bar" id="results-chart"></table>');
     // create caption
+    var $caption = $('<caption>Quiz Results</caption>');
     // Append the caption to the table
+    $caption.appendTo($table);
 
     // create table header
+    var $header = $('<thead></thead>');
     // create header row
+    var $headerRow = $('<tr></tr>');
     // create header column for Sign with scope="col"
+    var $headerColSign = $('<th scope="col">Sign</tr>');
     // create header column for Percentage with scope="col"
+    var $headerColPercent = $('<th scope="col">Percentage</tr>');
     // Append the header columns to the row
+    $headerColSign.appendTo($headerRow);
     // Append the header row to the header
+    $headerColPercent.appendTo($headerRow);
     // Append the header to the table
+    $headerRow.appendTo($table);
 
     // create table body
+    var $body = $('<tbody></tbody>');
     // for each sign in the signPercentages
+    for (sign in signPercentages) {
       // create a row with scope="row"
+      var $bodyRow = $('<tr></tr>');
       // create a cell with inner text as the sign name (key)
+      var $bodyColSign = $('<th scope="row">' + sign + '</th>');
       // create a cell with inner text as the percentage (value)
+      var $bodyColPercentage = $('<td>' + signPercentages[sign] + '</td>');
       // append these cells to the row
+      $bodyColSign.appendTo($bodyRow);
+      $bodyColPercentage.appendTo($bodyRow);
       // append the row to the table body
+      $bodyRow.appendTo($body);
+    }
     // append the body to the table
+    $body.appendTo($table);
 
     // Append the table to the resultsChart div
+    $table.appendTo($resultsChart);
   }
 
   // Set event listeners (providing appropriate handlers as input)
