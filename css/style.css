@@ -282,6 +282,21 @@ input[type=range] {
   justify-content: center;
 }
 
+.chart-container {
+  height: 300px;
+  max-width: 300px;
+  width: 100%;
+  margin: 0 auto 5em auto;
+}
+
+.chart-sign {
+	transform: rotate(-45deg);
+	word-wrap: normal;
+  /* Necessary because of charts.css code */
+  align-items: end !important;
+	padding: 0 0.5em 0 0 !important;
+}
+
 .cta-container {
   display: grid;
   grid-template-columns: 1fr 1fr;

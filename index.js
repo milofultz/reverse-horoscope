@@ -226,48 +226,33 @@ $(document).ready(function () {
   };
 
   var makeResultsChart = function (signPercentages) {
-    // create table element
-    var $table = $('<table class="results-chart charts-css bar" id="results-chart"></table>');
-    // create caption
+    var $table = $('<table class="results-chart charts-css column hide-data show-labels data-spacing-2" id="results-chart"></table>');
     var $caption = $('<caption>Quiz Results</caption>');
-    // Append the caption to the table
     $caption.appendTo($table);
 
-    // create table header
     var $header = $('<thead></thead>');
-    // create header row
     var $headerRow = $('<tr></tr>');
-    // create header column for Sign with scope="col"
-    var $headerColSign = $('<th scope="col">Sign</tr>');
-    // create header column for Percentage with scope="col"
-    var $headerColPercent = $('<th scope="col">Percentage</tr>');
-    // Append the header columns to the row
+    var $headerColSign = $('<th scope="col">Sign</tr>').hide();
+    var $headerColPercent = $('<th scope="col">Percentage</tr>').hide();
     $headerColSign.appendTo($headerRow);
-    // Append the header row to the header
     $headerColPercent.appendTo($headerRow);
-    // Append the header to the table
     $headerRow.appendTo($table);
 
-    // create table body
     var $body = $('<tbody></tbody>');
-    // for each sign in the signPercentages
+    var maxScore = Object.values(signPercentages).reduce(function (highest, current) {
+      return highest > current ? highest : current;
+    });
+    console.log(maxScore);
     for (sign in signPercentages) {
-      // create a row with scope="row"
       var $bodyRow = $('<tr></tr>');
-      // create a cell with inner text as the sign name (key)
-      var $bodyColSign = $('<th scope="row">' + sign + '</th>');
-      // create a cell with inner text as the percentage (value)
-      var $bodyColPercentage = $('<td>' + signPercentages[sign] + '</td>');
-      // append these cells to the row
+      var $bodyColSign = $('<th scope="row" class="chart-sign">' + sign + '</th>');
+      var $bodyColPercentage = $('<td style="--size: calc(' + signPercentages[sign] + ' / ' + maxScore + ')">' + signPercentages[sign] + '</td>');
       $bodyColSign.appendTo($bodyRow);
       $bodyColPercentage.appendTo($bodyRow);
-      // append the row to the table body
       $bodyRow.appendTo($body);
     }
-    // append the body to the table
-    $body.appendTo($table);
 
-    // Append the table to the resultsChart div
+    $body.appendTo($table);
     $table.appendTo($resultsChart);
   }
 
