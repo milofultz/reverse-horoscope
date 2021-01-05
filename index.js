@@ -6,7 +6,9 @@ $(document).ready(function () {
 
   // Header
   var $header = $('<header></header>');
-  var $nav = $('<nav class="text-right navbar" id="navbar"><ul class="nav-list" id="nav-list"><li class="nav-list-item" id="nav-list-about">About</li></ul></nav>');
+  var $nav = $('<nav class="text-right navbar" id="navbar"></nav>');
+  var $navList = $('<ul class="nav-list" id="nav-list"></ul>');
+  var $navListAbout = $('<li class="nav-list-item" id="nav-list-about">About</li>');
   // Main
   var $main = $('<main></main>');
   // Main:Title Screen
@@ -229,6 +231,11 @@ $(document).ready(function () {
   $quizStartButton.on('click', startQuiz);
   $quizSubmit.on('click', submitQuiz);
   $tryAgainButton.on('click', startQuiz);
+  $navListAbout.hover(function () {
+    $(this).html('<a href="http://www.github.com/milofultz" target="_blank">Made by Milo Fultz</a>')
+  }, function () {
+    $(this).text('About');
+  })
 
   // Append new HTML elements to the DOM
 
@@ -239,6 +246,8 @@ $(document).ready(function () {
   // Header
   $header.appendTo($body);
   $nav.appendTo($header);
+  $navList.appendTo($nav);
+  $navListAbout.appendTo($navList);
   // Main
   $main.appendTo($body);
   // Main:Title Screen
