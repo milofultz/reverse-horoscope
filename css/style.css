@@ -293,7 +293,7 @@ input[type=range] {
 	transform: rotate(-45deg);
 	word-wrap: normal;
   /* Necessary because of charts.css code */
-  align-items: end !important;
+  align-items: flex-end !important;
 	padding: 0 0.5em 0 0 !important;
 }
 
