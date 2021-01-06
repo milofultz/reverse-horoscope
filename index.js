@@ -14,7 +14,7 @@ $(document).ready(function () {
   // Main:Title Screen
   var $titleScreen = $('<section class="container title-screen text-center" id="title-screen"></section>');
   var $mainTitle = $('<h1 class="title" id="main-title">What\'s Your Actual Sign?</h1>');
-  var $mainDescription = $('<h2 class="description" id="main-description">Discover when you should have been born</h2>');
+  var $mainDescription = $('<span class="description" id="main-description">Discover when you should have been born</span>');
   var $quizStartButton = $('<div class="button" id="quiz-start-button">Start</div>');
   // Main:Quiz
   var $quiz = $('<section class="container" id="quiz"></section>');
@@ -23,7 +23,7 @@ $(document).ready(function () {
   // Main:Results
   var $results = $('<section class="container text-center" id="results"></section>');
   var $resultsTitle = $('<h1 class="title" id="results-title"></h1>');
-  var $resultsBirthday = $('<h2 class="description" id="results-birthday"></h2>');
+  var $resultsBirthday = $('<span class="description" id="results-birthday"></span>');
   var $resultsConstellation = $('<img src="" class="constellation" id="results-constellation" />');
   var $resultsChart = $('<div class="chart-container" id="chart-container"></div>');
   var $resultsCtaButtons = $('<div class="cta-container" id="results-cta-buttons"></div>');
