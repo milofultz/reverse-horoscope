@@ -220,6 +220,8 @@ input[type=range] {
   color: #777;
   opacity: var(--description-opacity);
   margin-bottom: 1.3em;
+  padding-left: 1em;
+  padding-right: 1em;
 }
 
 .title-screen .description {
@@ -349,3 +351,8 @@ input[type=range] {
 
 /* Media Queries */
 
+@media (max-width: 575.98px) {
+  .title {
+    font-size: 4em;
+  }
+}
