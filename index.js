@@ -158,15 +158,6 @@ $(document).ready(function () {
       var questionScore = parseInt($question.val());
       quizAnswers[questionSign] = questionScore;
     }
-    // get highest score
-    var winner = '';
-    var highestScore = 0;
-    for (key in quizAnswers) {
-      if (quizAnswers[key] > highestScore) {
-        winner = key;
-        highestScore = quizAnswers[key];
-      }
-    };
     // get adjusted averages by adding adjacent signs
     var adjustedScores = {};
     for (var i = 0; i < horoscopeSignsOrdered.length; i++) {
@@ -177,6 +168,15 @@ $(document).ready(function () {
                              0.1 * quizAnswers[lastSign] +
                              0.1 * quizAnswers[nextSign];
     }
+    // get highest score
+    var winner = '';
+    var highestScore = 0;
+    for (key in adjustedScores) {
+      if (adjustedScores[key] > highestScore) {
+        winner = key;
+        highestScore = adjustedScores[key];
+      }
+    };
     // get scores in percent
     var totalScores = Object.values(adjustedScores).reduce(getSum);
     var resultsInPercent = {};
@@ -197,10 +197,10 @@ $(document).ready(function () {
       resultsInPercent[sign]++;
     }
 
-    var scores = {};
-    scores.winner = winner;
-    scores.percentResults = resultsInPercent;
-    return scores;
+    return {
+      winner: winner,
+      percentResults: resultsInPercent
+    };
   };
 
   var getSum = function (a, b) {
@@ -213,9 +213,9 @@ $(document).ready(function () {
     var lastSign = horoscopeSignsOrdered[(12 + signIndex - 1) % 12];
     var nextSign = horoscopeSignsOrdered[(signIndex + 1) % 12];
     if (percents[lastSign] > percents[nextSign]) {
-      var offset = midpoint - ((1/percents[lastSign]) * midpoint);
+      var offset = midpoint - ((percents[lastSign]/100) * midpoint);
     } else {
-      var offset = midpoint + (1/percents[nextSign]) * midpoint;
+      var offset = midpoint + ((percents[nextSign]/100) * midpoint);
     }
     // set birthday to start + adjustment
     var birthday = new Date(ms=(horoscopeDates[sign]['start'].getTime() + offset));
@@ -248,11 +248,12 @@ $(document).ready(function () {
     var maxScore = Object.values(signPercentages).reduce(function (highest, current) {
       return highest > current ? highest : current;
     });
-    console.log(maxScore);
+
     for (sign in signPercentages) {
       var $bodyRow = $('<tr></tr>');
       var $bodyColSign = $('<th scope="row" class="chart-sign">' + sign + '</th>');
-      var $bodyColPercentage = $('<td style="--size: calc(' + signPercentages[sign] + ' / ' + maxScore + ')">' + signPercentages[sign] + '</td>');
+      var graphPercent = Math.round(signPercentages[sign] / maxScore) === 0 ? (signPercentages[sign] / maxScore) + 1 / maxScore : (signPercentages[sign] / maxScore);
+      var $bodyColPercentage = $('<td style="--size: calc(' + graphPercent + ')">' + signPercentages[sign] + '</td>');
       $bodyColSign.appendTo($bodyRow);
       $bodyColPercentage.appendTo($bodyRow);
       $bodyRow.appendTo($body);
