@@ -38,8 +38,9 @@ body::before {
 }
 
 main {
-	position: absolute;
-	height: 100vh;
+  position: absolute;
+  height: 90vh;
+  top: 10vh;
 	width: 100%;
 	padding: auto 1em;
 	display: flex;
@@ -183,7 +184,7 @@ input[type=range] {
 /* Semantic Classes */
 
 .navbar {
-  position: fixed;
+  position: absolute;
   z-index: 99;
   right: 10px;
   margin: 1.5em 1em;
