@@ -40,6 +40,7 @@ body::before {
 main {
   position: absolute;
   height: 100vh;
+  max-width: 800px;
   width: 100%;
   display: flex;
   align-items: center;
@@ -161,7 +162,6 @@ input[type=range] {
   grid-auto-rows: auto;
   place-items: center;
   max-width: 800px;
-  padding: 0 4em;
   margin: auto;
   height: auto;
   backface-visibility: hidden;
@@ -345,3 +345,6 @@ input[type=range] {
     opacity: 1;
   }
 }
+
+/* Media Queries */
+
