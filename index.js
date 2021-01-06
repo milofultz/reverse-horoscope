@@ -37,7 +37,7 @@ $(document).ready(function () {
   };
 
   var sumAllValues = function (obj) {
-    return Object.values(adjustedScores).reduce(function (a, b) {
+    return Object.values(obj).reduce(function (a, b) {
       return a + b;
     });
   };
