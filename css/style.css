@@ -209,7 +209,7 @@ input[type=range] {
   text-shadow: #555 5px 8px 8px;
   padding: 10px 1em;
   margin-bottom: 16px;
-  animation: dropText 1s cubic-bezier(0.075, 0.82, 0.165, 1), fadeIn 1s ease-in;
+  animation: dropText 1.25s cubic-bezier(0.075, 0.82, 0.165, 1), fadeIn 1s ease-in;
 }
 
 .description {
@@ -329,12 +329,18 @@ input[type=range] {
 }
 
 @keyframes dropText {
-  from {
+  0% {
     transform: translateY(-500px);
+    text-shadow: #555 3px 5px 0;
   }
 
-  to {
+  50% {
+    text-shadow: #555 3px 5px 0;
+  }
+
+  100% {
     transform: translateY(0px);
+    text-shadow: #555 5px 8px 8px;
   }
 }
 
