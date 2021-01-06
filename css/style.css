@@ -230,6 +230,7 @@ input[type=range] {
 .button {
   padding: 0.7em;
   margin: auto;
+  margin-bottom: 3em;
   width: max-content;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -300,7 +301,6 @@ input[type=range] {
 .cta-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  padding-bottom: 3em;
 }
 
 /* Keyframes */
