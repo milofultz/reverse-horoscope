@@ -52,6 +52,8 @@ $(document).ready(function () {
   };
 
   var submitQuiz = function () {
+    $resultsChart.html('');
+
     var scores = getScores();
     var birthday = makeBirthday(scores.winner, scores.percentResults);
 
@@ -115,14 +117,12 @@ $(document).ready(function () {
     var showQuestion = function ($q) {
       $q.css({ opacity: '0' }).show()
       $q.animate({ opacity: '1' }, 350);
-      $('#next-question').animate({ opacity: '1' }, 350);
     };
     var hideQuestionAndShowNext = function ($q, $next) {
       $q.animate({ opacity: '0' }, 350, function () {
         $(this).hide()
         showQuestion($next);
       });
-      $('#next-question').animate({ opacity: '0' }, 350);
     };
 
     return function () {
@@ -134,11 +134,15 @@ $(document).ready(function () {
         showQuestion($nextQuestion);
       } else {
         hideQuestionAndShowNext($currentQuestion, $nextQuestion);
-      }
-
-      if (questions.length === 0) {
-        $('#next-question').remove();
-        $quizSubmit.show();
+        $('#next-question').animate({ opacity: '0' }, 350, function () {
+          if (questions.length === 0) {
+            $('#next-question').remove();
+            $quizSubmit.css('opacity', '0').show();
+            $quizSubmit.animate({ opacity: '1' }, 350);
+          } else {
+            $('#next-question').animate({ opacity: '1' }, 350);
+          }
+        });
       }
     };
   };
