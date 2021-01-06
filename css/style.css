@@ -10,20 +10,15 @@
 
 /* Sitewide Rules */
 
+* {
+  margin: 0;
+}
+
 body {
   font-family: "Roboto", Helvetica, sans-serif;
   color: var(--main-text);
   background-color: transparent;
-  /* text-shadow: 2px 2px 3px black; */
-}
-
-main {
-  position: absolute;
-  height: 80vh;
-  width: 100%;
-  display: flex;
-  justify-items: center;
-  align-items: center;
+  height: 100vh;
 }
 
 /* Background */
@@ -42,8 +37,12 @@ body::before {
   animation: stargazing 600s infinite linear;
 }
 
-h1, h2, h3 {
-  margin: 0;
+main {
+  position: absolute;
+  height: 80vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
 }
 
 a {
@@ -183,6 +182,8 @@ input[type=range] {
 /* Semantic Classes */
 
 .navbar {
+  position: fixed;
+  right: 10px;
   margin: 1.5em 2em;
 }
 
@@ -298,6 +299,7 @@ input[type=range] {
 .cta-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  padding-bottom: 3em;
 }
 
 /* Keyframes */
@@ -306,6 +308,7 @@ input[type=range] {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
