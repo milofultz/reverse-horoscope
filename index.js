@@ -1,26 +1,22 @@
 $(document).ready(function () {
-  // Select already existing elements
   var $body = $('body');
 
-  // Create new HTML elements
-
-  // Header
   var $header = $('<header></header>');
   var $nav = $('<nav class="text-right navbar" id="navbar"></nav>');
   var $navList = $('<ul class="nav-list" id="nav-list"></ul>');
   var $navListAbout = $('<li class="nav-list-item" id="nav-list-about">About</li>');
-  // Main
+
   var $main = $('<main></main>');
-  // Main:Title Screen
+
   var $titleScreen = $('<section class="container title-screen text-center" id="title-screen"></section>');
   var $mainTitle = $('<h1 class="title" id="main-title">What\'s Your Actual Sign?</h1>');
   var $mainDescription = $('<span class="description" id="main-description">Discover when you should have been born</span>');
   var $quizStartButton = $('<div class="button" id="quiz-start-button">Start</div>');
-  // Main:Quiz
+
   var $quiz = $('<section class="container" id="quiz"></section>');
   var $quizForm = $('<form action="" id="quiz-form"></form>'); // all q's dynamically generated
   var $quizSubmit = $('<div class="button" id="quiz-submit-button">Submit</div>').hide();
-  // Main:Results
+
   var $results = $('<section class="container text-center" id="results"></section>');
   var $resultsTitle = $('<h1 class="title" id="results-title"></h1>');
   var $resultsBirthday = $('<span class="description" id="results-birthday"></span>');
@@ -30,73 +26,28 @@ $(document).ready(function () {
   var $tryAgainButton = $('<div class="button" id="try-again-button">Try Again</div>');
   var $shareButton = $('<div class="button" id="share-button">Share</div>');
 
-  // Create event handler functions
+  /* --------------------
+  Event Handler Functions
+  -------------------- */
 
-  var startQuiz = function () {
-    $results.animate({ opacity: '0'}, 350, function () {
-      $results.hide();
-      $quiz.show().animate({ opacity: '1'}, 350)
-      $quizForm.html('');
-    });
-
-    var addNextQuestionToQuiz = makeQuizQuestionManager(generateQuestions());
-    var $nextButton = $('<div class="button next-question" id="next-question">Next</div>');
-    $nextButton.on('click', addNextQuestionToQuiz);
-
-    $titleScreen.animate({ opacity: '0' }, 350, function () {
-      $titleScreen.hide();
-      $quiz.show();
-      addNextQuestionToQuiz();
-      $nextButton.css('opacity', '0').appendTo($quiz).animate({ opacity: '1' }, 350);
+  var getMaxValue = function (obj) {
+    return Object.values(obj).reduce(function (highest, current) {
+      return highest > current ? highest : current;
     });
   };
 
-  var submitQuiz = function () {
-    $resultsChart.html('');
-
-    var scores = getScores();
-    var birthday = makeBirthday(scores.winner, scores.percentResults);
-
-    $resultsTitle.text('Your Real Sign Is ' + scores.winner + '!');
-    $resultsBirthday.text('You should have been born on ' + getMonthName(birthday.getMonth()) + ' ' + birthday.getDate() + '.');
-    makeResultsChart(scores.percentResults);
-
-    $quiz.animate({ opacity: '0'}, 350, function () {
-      $quiz.hide();
-      $quizSubmit.hide();
-      $results.show().animate({ opacity: '1'}, 350);
+  var sumAllValues = function (obj) {
+    return Object.values(adjustedScores).reduce(function (a, b) {
+      return a + b;
     });
   };
 
-  var generateQuestions = function () {
-    horoscopes = shuffleArray(getRandomHoroscopes());
-    questions = [];
-    for (var i = 0; i < horoscopes.length; i++) {
-      var number = i + 1
-      var horoscope = Object.values(horoscopes[i])[0];
-      var sign = Object.keys(horoscopes[i])[0];
-      var $questionContainer = $('<fieldset class="question-container" id="question-' + number + '"></fieldset>');
-      var $questionHeader = $('<legend id="question-' + number + '-legend">Question ' + number + ' of 12</legend><h3 class="question-header text-center" id="question-' + number + 'header">' + number + ' / 12</h3>');
-      var $questionText = $('<div class="question-text" id="question-' + number + '-text"></div>');
-      $questionText.text(horoscope);
-      var $questionInput = $('<div class="input-container"><label class="question-label text-center" for="question-' + number + '">How much does this resonate with you today?</label><br><input type="range" min="1" max="100" data-sign="' + sign + '" class="range-slider" id="question-' + number + '-answer" name="question-' + number + '"></input></div>')
-      $questionHeader.appendTo($questionContainer);
-      $questionText.appendTo($questionContainer);
-      $questionInput.appendTo($questionContainer);
-      questions.push($questionContainer);
-    }
-    return questions;
-  };
-
-  var getRandomHoroscopes = function () {
-    var quizHoroscopes = [];
-    for (sign in horoscopesText) {
-      var index = Math.floor(Math.random() * horoscopesText[sign].length);
-      var signObj = {};
-      signObj[sign] = horoscopesText[sign][index];
-      quizHoroscopes.push(signObj);
-    }
-    return quizHoroscopes;
+  var getMonthName = function(num) {
+    var months = [
+      "January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December"
+    ];
+    return months[num];
   };
 
   var shuffleArray = function (array) {
@@ -110,8 +61,40 @@ $(document).ready(function () {
     return array;
   };
 
+  var getRandomHoroscopes = function () {
+    var quizHoroscopes = [];
+    for (sign in horoscopesText) {
+      var index = Math.floor(Math.random() * horoscopesText[sign].length);
+      var signObj = {};
+      signObj[sign] = horoscopesText[sign][index];
+      quizHoroscopes.push(signObj);
+    }
+    return quizHoroscopes;
+  };
+
+  var generateQuestions = function () {
+    var horoscopes = shuffleArray(getRandomHoroscopes());
+    var questions = [];
+    for (var i = 0; i < horoscopes.length; i++) {
+      var sign = Object.keys(horoscopes[i])[0];
+      var horoscope = Object.values(horoscopes[i])[0];
+
+      var number = i + 1
+      var $questionContainer = $('<fieldset class="question-container" id="question-' + number + '"></fieldset>');
+      var $questionHeader = $('<legend id="question-' + number + '-legend">Question ' + number + ' of 12</legend><h3 class="question-header text-center" id="question-' + number + 'header">' + number + ' / 12</h3>');
+      var $questionText = $('<div class="question-text" id="question-' + number + '-text"></div>');
+      $questionText.text(horoscope);
+      var $questionInput = $('<div class="input-container"><label class="question-label text-center" for="question-' + number + '">How much does this resonate with you today?</label><br><input type="range" min="1" max="100" data-sign="' + sign + '" class="range-slider" id="question-' + number + '-answer" name="question-' + number + '"></input></div>');
+
+      $questionHeader.appendTo($questionContainer);
+      $questionText.appendTo($questionContainer);
+      $questionInput.appendTo($questionContainer);
+      questions.push($questionContainer);
+    }
+    return questions;
+  };
+
   var makeQuizQuestionManager = function (questions) {
-    // make a copy to not modify input array
     questions = questions.slice();
 
     var showQuestion = function ($q) {
@@ -136,6 +119,7 @@ $(document).ready(function () {
         hideQuestionAndShowNext($currentQuestion, $nextQuestion);
         $('#next-question').animate({ opacity: '0' }, 350, function () {
           if (questions.length === 0) {
+            // Change `next` button to `submit`
             $('#next-question').remove();
             $quizSubmit.css('opacity', '0').show();
             $quizSubmit.animate({ opacity: '1' }, 350);
@@ -197,16 +181,7 @@ $(document).ready(function () {
       }
     };
 
-    return {
-      winner: winner,
-      percentResults: resultsInPercent
-    };
-  };
-
-  var sumAllValues = function (obj) {
-    return Object.values(adjustedScores).reduce(function (a, b) {
-      return a + b;
-    });
+    return { winner: winner, resultsInPercent: resultsInPercent };
   };
 
   var makeBirthday = function (sign, percents) {
@@ -218,14 +193,6 @@ $(document).ready(function () {
     var offset = midpoint - ((percents[lastSign]/maxScore) * midpoint) + ((percents[nextSign]/maxScore) * midpoint);
     // set birthday to start + adjustment
     return new Date(ms=(horoscopeDates[sign]['start'].getTime() + offset));
-  };
-
-  var getMonthName = function(num) {
-    var months = [
-      "January", "February", "March", "April", "May", "June",
-      "July", "August", "September", "October", "November", "December"
-    ];
-    return months[num];
   };
 
   var makeResultsChart = function (signPercentages) {
@@ -258,47 +225,79 @@ $(document).ready(function () {
     $table.appendTo($resultsChart);
   };
 
-
-  var getMaxValue = function (obj) {
-    return Object.values(obj).reduce(function (highest, current) {
-      return highest > current ? highest : current;
+  var startQuiz = function () {
+    $results.animate({ opacity: '0'}, 350, function () {
+      $results.hide();
+      $quiz.show().animate({ opacity: '1'}, 350)
+      $quizForm.html('');
     });
-  }
 
-  // Set event listeners (providing appropriate handlers as input)
+    var addNextQuestionToQuiz = makeQuizQuestionManager(generateQuestions());
+    var $nextButton = $('<div class="button next-question" id="next-question">Next</div>');
+    $nextButton.on('click', addNextQuestionToQuiz);
 
-  $quizStartButton.on('click', startQuiz);
-  $quizSubmit.on('click', submitQuiz);
-  $tryAgainButton.on('click', startQuiz);
+    $titleScreen.animate({ opacity: '0' }, 350, function () {
+      $titleScreen.hide();
+      $quiz.show();
+      addNextQuestionToQuiz();
+      $nextButton.css('opacity', '0').appendTo($quiz).animate({ opacity: '1' }, 350);
+    });
+  };
+
+  var submitQuiz = function () {
+    $resultsChart.html('');
+
+    var scores = getScores();
+    var birthday = makeBirthday(scores.winner, scores.resultsInPercent);
+
+    $resultsTitle.text('Your Real Sign Is ' + scores.winner + '!');
+    $resultsBirthday.text('You should have been born on ' + getMonthName(birthday.getMonth()) + ' ' + birthday.getDate());
+    makeResultsChart(scores.resultsInPercent);
+
+    $quiz.animate({ opacity: '0'}, 350, function () {
+      $quiz.hide();
+      $quizSubmit.hide();
+      $results.show().animate({ opacity: '1'}, 350);
+    });
+  };
+
+  /* ------------
+  Event Listeners
+  ------------ */
+
   $navListAbout.hover(function () {
     $(this).html('<a href="http://www.github.com/milofultz" target="_blank">Made by Milo Fultz</a>')
   }, function () {
     $(this).text('About');
-  })
+  });
+  $quizStartButton.on('click', startQuiz);
+  $quizSubmit.on('click', submitQuiz);
+  $tryAgainButton.on('click', startQuiz);
 
-  // Append new HTML elements to the DOM
+  /* -------------------
+  Appending DOM Elements
+  ------------------- */
 
-  // Hide later elements
-  $quiz.toggle();
-  $results.toggle();
+  // Show only title screen
+  $quiz.hide();
+  $results.hide();
 
-  // Header
   $header.appendTo($body);
   $nav.appendTo($header);
   $navList.appendTo($nav);
   $navListAbout.appendTo($navList);
-  // Main
+
   $main.appendTo($body);
-  // Main:Title Screen
+
   $titleScreen.appendTo($main);
   $mainTitle.appendTo($titleScreen);
   $mainDescription.appendTo($titleScreen);
   $quizStartButton.appendTo($titleScreen);
-  // Main:Quiz
+
   $quiz.appendTo($main);
   $quizForm.appendTo($quiz);
   $quizSubmit.appendTo($quiz);
-  // Main:Results
+
   $results.appendTo($main);
   $resultsTitle.appendTo($results);
   $resultsBirthday.appendTo($results);
