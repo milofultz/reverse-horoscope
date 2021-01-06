@@ -11,7 +11,7 @@
 /* Sitewide Rules */
 
 body {
-  font-family: "Roboto", sans-serif;
+  font-family: "Roboto", Helvetica, sans-serif;
   color: var(--main-text);
   background-color: transparent;
   /* text-shadow: 2px 2px 3px black; */
@@ -39,10 +39,7 @@ body::before {
   right: -100%;
   z-index: -1;
   background: url("../assets/stars_bg.png") center repeat repeat;
-  animation-duration: 720s;
-  animation-iteration-count: infinite;
-  animation-timing-function: linear;
-  animation-name: stargazing;
+  animation: stargazing 600s infinite linear;
 }
 
 h1, h2, h3 {
