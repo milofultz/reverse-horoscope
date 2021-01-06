@@ -34,7 +34,7 @@ body::before {
   right: -100%;
   z-index: -1;
   background: url("../assets/stars_bg.png") center repeat repeat;
-  animation: stargazing 600s infinite linear;
+  animation: stargazing 4s ease;
 }
 
 main {
@@ -306,39 +306,31 @@ input[type=range] {
 
 @keyframes stargazing {
   from {
-    transform: rotate(0deg);
+    transform: rotate(-3deg);
   }
 
   to {
-    transform: rotate(360deg);
+    transform: rotate(0deg);
   }
 }
 
 @keyframes taglineFadeIn {
-  0% {
+  from {
     opacity: 0;
   }
 
-  33% {
-    opacity: 0;
-  }
-
-  100% {
+  to {
     opacity: var(--description-opacity);
   }
 }
 
 @keyframes dropText {
-  0% {
-    transform: translateY(-500px);
+  from {
+    transform: translateY(-200px);
     text-shadow: #555 3px 5px 0;
   }
 
-  50% {
-    text-shadow: #555 3px 5px 0;
-  }
-
-  100% {
+  to {
     transform: translateY(0px);
     text-shadow: #555 5px 8px 8px;
   }
