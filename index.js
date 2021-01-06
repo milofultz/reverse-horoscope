@@ -115,12 +115,14 @@ $(document).ready(function () {
     var showQuestion = function ($q) {
       $q.css({ opacity: '0' }).show()
       $q.animate({ opacity: '1' }, 350);
+      $('#next-question').animate({ opacity: '1' }, 350);
     };
     var hideQuestionAndShowNext = function ($q, $next) {
       $q.animate({ opacity: '0' }, 350, function () {
         $(this).hide()
         showQuestion($next);
       });
+      $('#next-question').animate({ opacity: '0' }, 350);
     };
 
     return function () {
