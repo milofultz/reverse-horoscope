@@ -4,7 +4,7 @@ $(document).ready(function () {
   var $header = $('<header></header>');
   var $nav = $('<nav class="text-right navbar" id="navbar"></nav>');
   var $navList = $('<ul class="nav-list" id="nav-list"></ul>');
-  var $navListAbout = $('<li class="nav-list-item" id="nav-list-about"><img src="./assets/GitHub-Mark-Light-32px.png"></li>');
+  var $navListAbout = $('<li class="nav-list-item" id="nav-list-about"><a href="http://www.github.com/milofultz"><img src="./assets/GitHub-Mark-Light-32px.png"></a></li>');
 
   var $main = $('<main></main>');
 
